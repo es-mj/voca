@@ -85,7 +85,7 @@
         </button>
         <div class="flex flex-col">
           <span id="header-day-label" class="text-xs font-bold text-primary tracking-wide">HOME</span>
-          <h1 id="header-title" class="text-lg font-bold text-on-surface leading-tight">영단어 학습장</h1>
+          <h1 id="header-title" class="text-lg font-bold text-on-surface leading-tight">🍫 vocabulary for JH 🍓</h1>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -138,7 +138,7 @@
           </div>
           <h2 class="text-2xl sm:text-3xl font-bold mt-1">오늘의 영단어 학습</h2>
           <p class="text-xs sm:text-sm text-on-primary/85 leading-relaxed">
-            Day 1부터 Day 9까지 총 243개 단어와 학교 학습지 핵심 어휘를 단계별로 마스터하세요.
+            Day 1부터 Day 9까지 총 243개 단어와 학교 학습지 핵심 어휘, 연관 숙어를 단계별로 마스터하세요.
           </p>
         </div>
         
@@ -236,7 +236,7 @@
           </div>
           <div>
             <h4 class="text-sm font-bold text-text-primary">플래시카드 카드 넘기기</h4>
-            <p class="text-xs text-text-secondary">앞뒤로 뒤집으며 빠르게 암기 상태를 점검하세요</p>
+            <p class="text-xs text-text-secondary">앞뒤로 뒤집으며 연관 표현과 암기 상태를 점검하세요</p>
           </div>
         </div>
         <button id="btn-quick-flashcard" class="px-3.5 py-2 bg-primary text-on-primary text-xs font-bold rounded-xl shadow-xs active:scale-95 transition-transform shrink-0">
@@ -296,8 +296,10 @@
         <div id="quiz-progress-bar" class="bg-primary h-full transition-all duration-300" style="width: 20%"></div>
       </div>
 
-      <div id="flashcard" class="w-full h-72 cursor-pointer perspective-1000 my-3">
-        <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d transition-transform rounded-2xl shadow-lg border border-surface-container bg-surface-white">
+      <div id="flashcard" class="w-full min-h-[320px] cursor-pointer perspective-1000 my-3">
+        <div id="flashcard-inner" class="relative w-full h-full min-h-[320px] duration-500 transform-style-3d transition-transform rounded-2xl shadow-lg border border-surface-container bg-surface-white">
+          
+          <!-- Front of Flashcard -->
           <div class="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center text-center backface-hidden bg-surface-white rounded-2xl">
             <div class="w-full flex justify-between items-center">
               <div class="flex items-center gap-1.5">
@@ -310,24 +312,33 @@
                 <span class="material-symbols-outlined text-lg">volume_up</span>
               </button>
             </div>
-            <div>
+            <div class="my-auto">
               <h2 id="fc-word" class="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">Accomplish</h2>
-              <p class="text-xs text-text-secondary mt-3">탭하여 뜻 확인하기</p>
+              <p class="text-xs text-text-secondary mt-3">탭하여 뜻 및 연관 표현 확인</p>
             </div>
             <div class="text-[11px] text-outline flex items-center gap-1">
               <span class="material-symbols-outlined text-xs">touch_app</span> Tap to Flip
             </div>
           </div>
 
-          <div class="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 bg-surface-container-low rounded-2xl">
+          <!-- Back of Flashcard -->
+          <div class="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 bg-surface-container-low rounded-2xl overflow-y-auto no-scrollbar">
             <div class="w-full flex justify-end">
-              <span class="text-xs font-semibold text-primary">의미 확인</span>
+              <span class="text-xs font-semibold text-primary">의미 및 연관 숙어</span>
             </div>
-            <div>
+            <div class="my-auto w-full flex flex-col items-center gap-2.5">
               <h3 id="fc-meaning" class="text-2xl sm:text-3xl font-bold text-text-primary">성취하다, 완수하다</h3>
-              <p id="fc-word-sub" class="text-sm font-semibold text-text-secondary mt-2">Accomplish</p>
+              <p id="fc-word-sub" class="text-sm font-semibold text-text-secondary">Accomplish</p>
+              
+              <!-- Collocation / Usage Info Box -->
+              <div id="fc-colloc-box" class="hidden w-full max-w-[90%] bg-surface-white p-3 rounded-xl border border-indigo-100 text-left shadow-xs mt-1">
+                <div class="flex items-center gap-1 text-primary text-[11px] font-bold mb-1">
+                  <span class="material-symbols-outlined text-[14px]">auto_stories</span> 필수 연관 표현
+                </div>
+                <p id="fc-colloc-text" class="text-xs font-semibold text-text-primary leading-snug"></p>
+              </div>
             </div>
-            <div class="text-[11px] text-outline flex items-center gap-1">
+            <div class="text-[11px] text-outline flex items-center gap-1 mt-2">
               <span class="material-symbols-outlined text-xs">touch_app</span> 다시 탭하면 앞면
             </div>
           </div>
@@ -377,7 +388,7 @@
           <span id="choice-card-point" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-school-bg text-school-text border border-indigo-200">★ 학습지</span>
         </div>
         <h2 id="choice-card-word" class="text-3xl sm:text-4xl font-bold text-on-surface text-center tracking-tight">Abound</h2>
-        <p id="choice-card-feedback-hint" class="text-xs font-semibold text-text-secondary mt-2 opacity-0 transition-opacity"></p>
+        <p id="choice-card-feedback-hint" class="text-xs font-semibold text-text-secondary mt-2 opacity-0 transition-opacity text-center"></p>
       </div>
 
       <!-- Options Grid (4 options) -->
@@ -605,258 +616,259 @@
   <script>
     // ==========================================
     // VOCABULARY DATABASE (Day 1 ~ Day 9)
+    // WITH ESSENTIAL COLLOCATIONS & IDIOM PATTERNS
     // ==========================================
     const TOTAL_DAYS = 9;
     const VOCAB_DATABASE = {
       1: [
-        { word: 'look forward to ~', pos: 'phr.', meaning: '~을 기대하다', point: false },
-        { word: 'sunscreen', pos: '명', meaning: '자외선 차단제', point: false },
-        { word: 'prefer', pos: '동', meaning: '선호하다', point: false },
-        { word: 'prepare', pos: '동', meaning: '준비하다', point: false },
-        { word: 'pack', pos: '동', meaning: '(짐을) 싸다', point: true },
-        { word: 'surely', pos: '부', meaning: '분명히', point: false },
-        { word: 'personality', pos: '명', meaning: '성격', point: true },
-        { word: 'ruin', pos: '동', meaning: '망치다', point: true },
-        { word: 'flexibility', pos: '명', meaning: '유연성, 융통성', point: true },
-        { word: 'loose', pos: '형', meaning: '느슨한', point: true },
-        { word: 'field trip', pos: '명', meaning: '견학(여행)', point: false },
-        { word: 'location', pos: '명', meaning: '장소, 위치', point: true },
-        { word: 'traffic', pos: '명', meaning: '교통(량), 차량', point: false },
-        { word: 'rush hour', pos: '명', meaning: '혼잡 시간대', point: true },
-        { word: 'set', pos: '동', meaning: '(알람)을 맞추다', point: false },
-        { word: 'destination', pos: '명', meaning: '목적지', point: true },
-        { word: 'consider', pos: '동', meaning: '고려하다', point: false },
-        { word: 'budget', pos: '명', meaning: '예산', point: false },
-        { word: 'arrange', pos: '동', meaning: '마련하다', point: false },
-        { word: 'accommodation', pos: '명', meaning: '숙소, 숙박시설', point: true },
-        { word: 'besides', pos: 'phr.', meaning: '~ 외에도', point: false },
-        { word: 'identify', pos: '동', meaning: '확인하다', point: true },
-        { word: 'try ~ out', pos: 'phr.', meaning: '~을 시도해 보다', point: false },
-        { word: 'rappel', pos: '동', meaning: '밧줄을 타고 내려가다', point: false },
-        { word: 'exciting', pos: '형', meaning: '흥미진진한', point: false },
-        { word: 'dent', pos: '명', meaning: '(부딪혀서) 움푹 들어간 곳', point: true },
-        { word: 'equipped with ~', pos: 'phr.', meaning: '~을 갖춘', point: true },
-        { word: 'protective', pos: '형', meaning: '보호용의', point: false },
-        { word: 'gear', pos: '명', meaning: '장비', point: false },
-        { word: 'life jacket', pos: '명', meaning: '구명조끼', point: false },
-        { word: 'ride', pos: '명', meaning: '놀이기구', point: false },
-        { word: 'thrilling', pos: '형', meaning: '긴장감 넘치는, 짜릿한', point: false },
-        { word: 'reserve', pos: '동', meaning: '~을 예약하다', point: false },
-        { word: 'can’t wait for ~', pos: 'phr.', meaning: '~을 몹시 기대하다', point: false }
+        { word: 'look forward to ~', pos: 'phr.', meaning: '~을 기대하다', point: false, colloc: 'look forward to + -ing / N (~을 고대하다)' },
+        { word: 'sunscreen', pos: '명', meaning: '자외선 차단제', point: false, colloc: 'apply / wear sunscreen (선크림을 바르다)' },
+        { word: 'prefer', pos: '동', meaning: '선호하다', point: false, colloc: 'prefer A to B (B보다 A를 더 선호하다)' },
+        { word: 'prepare', pos: '동', meaning: '준비하다', point: false, colloc: 'prepare for ~ (~을 대비하다/준비하다)' },
+        { word: 'pack', pos: '동', meaning: '(짐을) 싸다', point: true, colloc: 'pack one’s bags (짐을 꾸리다)' },
+        { word: 'surely', pos: '부', meaning: '분명히', point: false, colloc: 'surely understand (확실히 이해하다)' },
+        { word: 'personality', pos: '명', meaning: '성격', point: true, colloc: 'personality traits (성격적 특성)' },
+        { word: 'ruin', pos: '동', meaning: '망치다', point: true, colloc: 'ruin the plan / day (계획/하루를 망치다)' },
+        { word: 'flexibility', pos: '명', meaning: '유연성, 융통성', point: true, colloc: 'mental flexibility (유연한 사고방식)' },
+        { word: 'loose', pos: '형', meaning: '느슨한', point: true, colloc: 'a loose schedule (여유 있는 일정)' },
+        { word: 'field trip', pos: '명', meaning: '견학(여행)', point: false, colloc: 'go on a field trip (현장체험학습을 가다)' },
+        { word: 'location', pos: '명', meaning: '장소, 위치', point: true, colloc: 'exact location (정확한 위치)' },
+        { word: 'traffic', pos: '명', meaning: '교통(량), 차량', point: false, colloc: 'heavy traffic (극심한 교통체증)' },
+        { word: 'rush hour', pos: '명', meaning: '혼잡 시간대', point: true, colloc: 'avoid rush hour (러시아워를 피하다)' },
+        { word: 'set', pos: '동', meaning: '(알람)을 맞추다', point: false, colloc: 'set an alarm (알람을 맞추다)' },
+        { word: 'destination', pos: '명', meaning: '목적지', point: true, colloc: 'reach a destination (목적지에 도착하다)' },
+        { word: 'consider', pos: '동', meaning: '고려하다', point: false, colloc: 'consider + -ing (~할 것을 고려하다)' },
+        { word: 'budget', pos: '명', meaning: '예산', point: false, colloc: 'on a tight budget (빠듯한 예산으로)' },
+        { word: 'arrange', pos: '동', meaning: '마련하다', point: false, colloc: 'arrange a meeting / tour (일정을 마련하다)' },
+        { word: 'accommodation', pos: '명', meaning: '숙소, 숙박시설', point: true, colloc: 'book accommodation (숙소를 예약하다)' },
+        { word: 'besides', pos: 'phr.', meaning: '~ 외에도', point: false, colloc: 'besides that (~ 외에도, 게다가)' },
+        { word: 'identify', pos: '동', meaning: '확인하다', point: true, colloc: 'identify a problem (문제를 확인/발견하다)' },
+        { word: 'try ~ out', pos: 'phr.', meaning: '~을 시도해 보다', point: false, colloc: 'try out new food (새로운 음식을 맛보다/시도하다)' },
+        { word: 'rappel', pos: '동', meaning: '밧줄을 타고 내려가다', point: false, colloc: 'rappel down a cliff (절벽을 타고 하강하다)' },
+        { word: 'exciting', pos: '형', meaning: '흥미진진한', point: false, colloc: 'an exciting adventure (짜릿한 모험)' },
+        { word: 'dent', pos: '명', meaning: '(부딪혀서) 움푹 들어간 곳', point: true, colloc: 'make a dent in ~ (~에 흠집을 내다)' },
+        { word: 'equipped with ~', pos: 'phr.', meaning: '~을 갖춘', point: true, colloc: 'be equipped with safety gear (안전 장비를 갖추다)' },
+        { word: 'protective', pos: '형', meaning: '보호용의', point: false, colloc: 'protective clothing / gear (보호복/장비)' },
+        { word: 'gear', pos: '명', meaning: '장비', point: false, colloc: 'outdoor / sports gear (야외/스포츠 장비)' },
+        { word: 'life jacket', pos: '명', meaning: '구명조끼', point: false, colloc: 'fasten a life jacket (구명조끼를 착용하다)' },
+        { word: 'ride', pos: '명', meaning: '놀이기구', point: false, colloc: 'amusement park ride (놀이공원 놀이기구)' },
+        { word: 'thrilling', pos: '형', meaning: '긴장감 넘치는, 짜릿한', point: false, colloc: 'a thrilling experience (스릴 넘치는 경험)' },
+        { word: 'reserve', pos: '동', meaning: '~을 예약하다', point: false, colloc: 'reserve a seat / table (좌석/테이블을 예약하다)' },
+        { word: 'can’t wait for ~', pos: 'phr.', meaning: '~을 몹시 기대하다', point: false, colloc: 'can’t wait to see you (너를 보길 몹시 기대해)' }
       ],
       2: [
-        { word: 'abroad', pos: '부', meaning: '해외에, 해외로', point: true },
-        { word: 'adventure', pos: '명', meaning: '모험', point: false },
-        { word: 'recommend', pos: '동', meaning: '추천하다', point: true },
-        { word: 'site', pos: '명', meaning: '위치, 장소', point: true },
-        { word: 'suit', pos: '동', meaning: '~에게 알맞다[편하다]', point: false },
-        { word: 'spectacular', pos: '형', meaning: '장관을 이루는', point: false },
-        { word: 'edge', pos: '명', meaning: '가장자리', point: true },
-        { word: 'release', pos: '동', meaning: '놓아주다, 풀어주다', point: true },
-        { word: 'float', pos: '동', meaning: '떠다니다, 띄우다', point: true },
-        { word: 'light', pos: '동', meaning: '불을 붙이다', point: false },
-        { word: 'come true', pos: 'phr.', meaning: '이루어지다, 실현되다', point: true },
-        { word: 'hold', pos: '동', meaning: '개최하다', point: false },
-        { word: 'celebration', pos: '명', meaning: '기념행사', point: false },
-        { word: 'last', pos: '동', meaning: '지속하다', point: false },
-        { word: 'in addition to ~', pos: 'phr.', meaning: '~ 이외에도', point: false },
-        { word: 'emphasize', pos: '동', meaning: '강조하다', point: true },
-        { word: 'temple', pos: '명', meaning: '사원', point: true },
-        { word: 'monument', pos: '명', meaning: '(건물·동상 등의) 기념물', point: true },
-        { word: 'take place', pos: 'phr.', meaning: '개최되다', point: false },
-        { word: 'lunar', pos: '형', meaning: '달의', point: true },
-        { word: 'solar', pos: '형', meaning: '태양의', point: true },
-        { word: 'exact', pos: '형', meaning: '정확한', point: false },
-        { word: 'head', pos: '동', meaning: '향하다', point: false },
-        { word: 'exotic', pos: '형', meaning: '이국적인', point: true },
-        { word: 'atmosphere', pos: '명', meaning: '분위기', point: true },
-        { word: 'huge', pos: '형', meaning: '엄청난, 막대한', point: false },
-        { word: 'selection', pos: '명', meaning: '선택 가능한 것들', point: false },
-        { word: 'resident', pos: '명', meaning: '거주자, 주민', point: true },
-        { word: 'recommendation', pos: '명', meaning: '추천, 권고', point: false },
-        { word: 'chance', pos: '명', meaning: '가능성', point: false },
-        { word: 'seasoned', pos: '형', meaning: '양념을 한', point: true },
-        { word: 'flat', pos: '형', meaning: '편평한', point: false },
-        { word: 'out of this world', pos: 'phr.', meaning: '너무 훌륭한, 이 세상의 것이 아닌', point: false }
+        { word: 'abroad', pos: '부', meaning: '해외에, 해외로', point: true, colloc: 'travel / study abroad (해외여행을 가다 / 유학하다)' },
+        { word: 'adventure', pos: '명', meaning: '모험', point: false, colloc: 'a spirit of adventure (모험심)' },
+        { word: 'recommend', pos: '동', meaning: '추천하다', point: true, colloc: 'recommend A to B (B에게 A를 추천하다)' },
+        { word: 'site', pos: '명', meaning: '위치, 장소', point: true, colloc: 'historical site (역사적 유적지)' },
+        { word: 'suit', pos: '동', meaning: '~에게 알맞다[편하다]', point: false, colloc: 'suit one’s needs (필요에 딱 들어맞다)' },
+        { word: 'spectacular', pos: '형', meaning: '장관을 이루는', point: false, colloc: 'a spectacular view (장관을 이루는 풍경)' },
+        { word: 'edge', pos: '명', meaning: '가장자리', point: true, colloc: 'on the edge of a cliff (절벽 가장자리에)' },
+        { word: 'release', pos: '동', meaning: '놓아주다, 풀어주다', point: true, colloc: 'release into the sky (하늘로 날려보내다)' },
+        { word: 'float', pos: '동', meaning: '떠다니다, 띄우다', point: true, colloc: 'float on water (물 위에 띄우다/떠다니다)' },
+        { word: 'light', pos: '동', meaning: '불을 붙이다', point: false, colloc: 'light a lantern / candle (등불/촛불을 켜다)' },
+        { word: 'come true', pos: 'phr.', meaning: '이루어지다, 실현되다', point: true, colloc: 'wishes come true (소원이 이루어지다)' },
+        { word: 'hold', pos: '동', meaning: '개최하다', point: false, colloc: 'hold a festival / meeting (축제/회의를 개최하다)' },
+        { word: 'celebration', pos: '명', meaning: '기념행사', point: false, colloc: 'in celebration of ~ (~을 기념하여)' },
+        { word: 'last', pos: '동', meaning: '지속하다', point: false, colloc: 'last for three days (3일 동안 지속되다)' },
+        { word: 'in addition to ~', pos: 'phr.', meaning: '~ 이외에도', point: false, colloc: 'in addition to that (그것에 더하여, 게다가)' },
+        { word: 'emphasize', pos: '동', meaning: '강조하다', point: true, colloc: 'emphasize the importance of ~ (~의 중요성을 강조하다)' },
+        { word: 'temple', pos: '명', meaning: '사원', point: true, colloc: 'visit an ancient temple (고대 사원을 방문하다)' },
+        { word: 'monument', pos: '명', meaning: '(건물·동상 등의) 기념물', point: true, colloc: 'historic monument (역사적 기념물)' },
+        { word: 'take place', pos: 'phr.', meaning: '개최되다', point: false, colloc: 'take place every year (매년 개최되다)' },
+        { word: 'lunar', pos: '형', meaning: '달의', point: true, colloc: 'lunar calendar (음력)' },
+        { word: 'solar', pos: '형', meaning: '태양의', point: true, colloc: 'solar energy / system (태양 에너지/태양계)' },
+        { word: 'exact', pos: '형', meaning: '정확한', point: false, colloc: 'the exact time / date (정확한 시간/날짜)' },
+        { word: 'head', pos: '동', meaning: '향하다', point: false, colloc: 'head towards the beach (해변으로 향하다)' },
+        { word: 'exotic', pos: '형', meaning: '이국적인', point: true, colloc: 'exotic food / culture (이국적인 음식/문화)' },
+        { word: 'atmosphere', pos: '명', meaning: '분위기', point: true, colloc: 'a cozy / lively atmosphere (아늑한/활기찬 분위기)' },
+        { word: 'huge', pos: '형', meaning: '엄청난, 막대한', point: false, colloc: 'a huge success (엄청난 성공)' },
+        { word: 'selection', pos: '명', meaning: '선택 가능한 것들', point: false, colloc: 'a wide selection of ~ (선택할 수 있는 아주 다양한 것)' },
+        { word: 'resident', pos: '명', meaning: '거주자, 주민', point: true, colloc: 'local residents (지역 주민들)' },
+        { word: 'recommendation', pos: '명', meaning: '추천, 권고', point: false, colloc: 'follow a recommendation (추천에 따르다)' },
+        { word: 'chance', pos: '명', meaning: '가능성', point: false, colloc: 'a good chance of ~ (~할 좋은 기회/가능성)' },
+        { word: 'seasoned', pos: '형', meaning: '양념을 한', point: true, colloc: 'seasoned vegetables (양념된 채소)' },
+        { word: 'flat', pos: '형', meaning: '편평한', point: false, colloc: 'flat ground (평평한 땅)' },
+        { word: 'out of this world', pos: 'phr.', meaning: '너무 훌륭한, 이 세상의 것이 아닌', point: false, colloc: 'The taste is out of this world! (맛이 기가 막히다!)' }
       ],
       3: [
-        { word: 'oyster', pos: '명', meaning: '굴', point: true },
-        { word: 'mixture', pos: '명', meaning: '혼합물, 혼합', point: true },
-        { word: 'pour', pos: '동', meaning: '따르다, 붓다; 쏟아지다', point: false },
-        { word: 'flavor', pos: '명', meaning: '맛, 풍미', point: true },
-        { word: 'refresh', pos: '동', meaning: '상쾌하게 하다', point: false },
-        { word: 'boost', pos: '동', meaning: '북돋우다', point: true },
-        { word: 'set up', pos: 'phr.', meaning: '~을 준비하다[설치하다]', point: true },
-        { word: 'peak', pos: '명', meaning: '절정, 정점, 최고조', point: true },
-        { word: 'seeker', pos: '명', meaning: '~을 추구하는 사람', point: true },
-        { word: 'challenging', pos: '형', meaning: '도전적인', point: false },
-        { word: 'canyoning', pos: '명', meaning: '계류타기, 급류타기', point: true },
-        { word: 'canyon', pos: '명', meaning: '협곡', point: true },
-        { word: 'zip-lining', pos: '명', meaning: '집라인 타기', point: false },
-        { word: 'rappelling', pos: '명', meaning: '라펠링(줄 타고 내려오기)', point: false },
-        { word: 'naturally', pos: '부', meaning: '(인공적이지 않고) 자연적으로', point: false },
-        { word: 'range', pos: '명', meaning: '다양성, ~에서 … 사이이다', point: true },
-        { word: 'rocky', pos: '형', meaning: '바위투성이의', point: false },
-        { word: 'a wide range of ~', pos: 'phr.', meaning: '아주 다양한 ~', point: false },
-        { word: 'pound', pos: '동', meaning: '쿵쿵 뛰다', point: true },
-        { word: 'impressive', pos: '형', meaning: '인상적인, 인상 깊은', point: true },
-        { word: 'spectacle', pos: '명', meaning: '장관', point: false },
-        { word: 'cliff', pos: '명', meaning: '절벽', point: true },
-        { word: 'artificially', pos: '부', meaning: '인공적으로', point: true },
-        { word: 'lie down', pos: 'phr.', meaning: '눕다, 누워 있다', point: true },
-        { word: 'slide', pos: '동', meaning: '미끄러지다', point: false },
-        { word: 'pool', pos: '명', meaning: '웅덩이', point: false },
-        { word: 'highlight', pos: '명', meaning: '가장 좋은[흥미로운] 부분', point: false },
-        { word: 'needless to say', pos: 'phr.', meaning: '말할 필요도 없이', point: true },
-        { word: 'vertical', pos: '형', meaning: '수직의, 세로의', point: true },
-        { word: 'force', pos: '명', meaning: '힘', point: false },
-        { word: 'stress', pos: '동', meaning: '강조하다', point: false }
+        { word: 'oyster', pos: '명', meaning: '굴', point: true, colloc: 'fresh oysters (신선한 굴)' },
+        { word: 'mixture', pos: '명', meaning: '혼합물, 혼합', point: true, colloc: 'a mixture of spices (양념 혼합물)' },
+        { word: 'pour', pos: '동', meaning: '따르다, 붓다; 쏟아지다', point: false, colloc: 'pour sauce over ~ (~위에 소스를 붓다)' },
+        { word: 'flavor', pos: '명', meaning: '맛, 풍미', point: true, colloc: 'rich flavor (풍부한 맛)' },
+        { word: 'refresh', pos: '동', meaning: '상쾌하게 하다', point: false, colloc: 'refresh one’s mind (기분을 상쾌하게 전환하다)' },
+        { word: 'boost', pos: '동', meaning: '북돋우다', point: true, colloc: 'boost energy / confidence (활력/자신감을 북돋우다)' },
+        { word: 'set up', pos: 'phr.', meaning: '~을 준비하다[설치하다]', point: true, colloc: 'set up a tent / system (텐트/시스템을 설치하다)' },
+        { word: 'peak', pos: '명', meaning: '절정, 정점, 최고조', point: true, colloc: 'reach a peak (정점에 도달하다)' },
+        { word: 'seeker', pos: '명', meaning: '~을 추구하는 사람', point: true, colloc: 'thrill seeker (스릴을 즐기는 사람)' },
+        { word: 'challenging', pos: '형', meaning: '도전적인', point: false, colloc: 'a challenging course (도전적인 코스)' },
+        { word: 'canyoning', pos: '명', meaning: '계류타기, 급류타기', point: true, colloc: 'go canyoning (캐녀닝하러 가다)' },
+        { word: 'canyon', pos: '명', meaning: '협곡', point: true, colloc: 'deep canyon (깊은 협곡)' },
+        { word: 'zip-lining', pos: '명', meaning: '집라인 타기', point: false, colloc: 'try zip-lining (짚라인을 타보다)' },
+        { word: 'rappelling', pos: '명', meaning: '라펠링(줄 타고 내려오기)', point: false, colloc: 'rappelling down a cliff (절벽 하강)' },
+        { word: 'naturally', pos: '부', meaning: '(인공적이지 않고) 자연적으로', point: false, colloc: 'naturally formed (자연적으로 형성된)' },
+        { word: 'range', pos: '명', meaning: '다양성, ~에서 … 사이이다', point: true, colloc: 'range from A to B (A에서 B까지 이르다)' },
+        { word: 'rocky', pos: '형', meaning: '바위투성이의', point: false, colloc: 'rocky mountain (험준한 바위산)' },
+        { word: 'a wide range of ~', pos: 'phr.', meaning: '아주 다양한 ~', point: false, colloc: 'a wide range of options (아주 다양한 선택지)' },
+        { word: 'pound', pos: '동', meaning: '쿵쿵 뛰다', point: true, colloc: 'heart starts to pound (심장이 쿵쾅거리기 시작하다)' },
+        { word: 'impressive', pos: '형', meaning: '인상적인, 인상 깊은', point: true, colloc: 'an impressive view (인상적인 전경)' },
+        { word: 'spectacle', pos: '명', meaning: '장관', point: false, colloc: 'a grand spectacle (웅장한 장관)' },
+        { word: 'cliff', pos: '명', meaning: '절벽', point: true, colloc: 'steep cliff (가파른 절벽)' },
+        { word: 'artificially', pos: '부', meaning: '인공적으로', point: true, colloc: 'artificially made (인공적으로 만들어진)' },
+        { word: 'lie down', pos: 'phr.', meaning: '눕다, 누워 있다', point: true, colloc: 'lie down on one’s back (등을 대고 눕다)' },
+        { word: 'slide', pos: '동', meaning: '미끄러지다', point: false, colloc: 'slide down a waterfall (폭포를 타고 미끄러져 내려가다)' },
+        { word: 'pool', pos: '명', meaning: '웅덩이', point: false, colloc: 'natural pool (자연 웅덩이/수영장)' },
+        { word: 'highlight', pos: '명', meaning: '가장 좋은[흥미로운] 부분', point: false, colloc: 'the highlight of the trip (여행의 백미/하이라이트)' },
+        { word: 'needless to say', pos: 'phr.', meaning: '말할 필요도 없이', point: true, colloc: 'Needless to say, it was great. (말할 필요도 없이 훌륭했다)' },
+        { word: 'vertical', pos: '형', meaning: '수직의, 세로의', point: true, colloc: 'a vertical drop (수직 낙하)' },
+        { word: 'force', pos: '명', meaning: '힘', point: false, colloc: 'the force of gravity / water (중력/물의 힘)' },
+        { word: 'stress', pos: '동', meaning: '강조하다', point: false, colloc: 'stress the safety rules (안전수칙을 강조하다)' }
       ],
       4: [
-        { word: 'sustainable', pos: '형', meaning: '지속 가능한', point: true },
-        { word: 'maintain', pos: '동', meaning: '유지하다', point: false },
-        { word: 'harm', pos: '동', meaning: '~에 해를 끼치다', point: false },
-        { word: 'aware of ~', pos: 'phr.', meaning: '~을 알고 있는, 인식하는', point: true },
-        { word: 'affect', pos: '동', meaning: '~에 영향을 주다', point: false },
-        { word: 'concept', pos: '명', meaning: '개념', point: false },
-        { word: 'sustainability', pos: '명', meaning: '지속 가능성', point: false },
-        { word: 'factor', pos: '명', meaning: '요인', point: false },
-        { word: 'focus on ~', pos: 'phr.', meaning: '~에 집중하다', point: false },
-        { word: 'disturb', pos: '동', meaning: '~을 방해하다', point: false },
-        { word: 'preserve', pos: '동', meaning: '보존하다', point: false },
-        { word: 'inhabitant', pos: '명', meaning: '거주민', point: false },
-        { word: 'suffer from ~', pos: 'phr.', meaning: '~로 고통받다', point: false },
-        { word: 'adjust', pos: '동', meaning: '적응하다', point: false },
-        { word: 'religious', pos: '형', meaning: '종교적인', point: true },
-        { word: 'economic', pos: '형', meaning: '경제의', point: false },
-        { word: 'positively', pos: '부', meaning: '긍정적으로', point: false },
-        { word: 'contribute to ~', pos: 'phr.', meaning: '~의 요인이 되다', point: false },
-        { word: 'book', pos: '동', meaning: '예약하다', point: false },
-        { word: 'suggestion', pos: '명', meaning: '제안', point: true },
-        { word: 'ban', pos: '동', meaning: '금지하다', point: true }
+        { word: 'sustainable', pos: '형', meaning: '지속 가능한', point: true, colloc: 'sustainable tourism / growth (지속 가능한 관광/성장)' },
+        { word: 'maintain', pos: '동', meaning: '유지하다', point: false, colloc: 'maintain balance / health (균형/건강을 유지하다)' },
+        { word: 'harm', pos: '동', meaning: '~에 해를 끼치다', point: false, colloc: 'do harm to nature (자연에 해를 끼치다)' },
+        { word: 'aware of ~', pos: 'phr.', meaning: '~을 알고 있는, 인식하는', point: true, colloc: 'be aware of the rules (규칙을 숙지하고 있다)' },
+        { word: 'affect', pos: '동', meaning: '~에 영향을 주다', point: false, colloc: 'directly affect the environment (환경에 직접 영향을 미치다)' },
+        { word: 'concept', pos: '명', meaning: '개념', point: false, colloc: 'basic concept (기본 개념)' },
+        { word: 'sustainability', pos: '명', meaning: '지속 가능성', point: false, colloc: 'environmental sustainability (환경적 지속 가능성)' },
+        { word: 'factor', pos: '명', meaning: '요인', point: false, colloc: 'a key factor (핵심 요인)' },
+        { word: 'focus on ~', pos: 'phr.', meaning: '~에 집중하다', point: false, colloc: 'focus on preserving nature (자연 보존에 집중하다)' },
+        { word: 'disturb', pos: '동', meaning: '~을 방해하다', point: false, colloc: 'disturb the wildlife (야생동물을 방해하다)' },
+        { word: 'preserve', pos: '동', meaning: '보존하다', point: false, colloc: 'preserve traditions (전통을 보존하다)' },
+        { word: 'inhabitant', pos: '명', meaning: '거주민', point: false, colloc: 'island inhabitants (섬 거주민들)' },
+        { word: 'suffer from ~', pos: 'phr.', meaning: '~로 고통받다', point: false, colloc: 'suffer from noise (소음으로 고통받다)' },
+        { word: 'adjust', pos: '동', meaning: '적응하다', point: false, colloc: 'adjust to local culture (현지 문화에 적응하다)' },
+        { word: 'religious', pos: '형', meaning: '종교적인', point: true, colloc: 'religious traditions / beliefs (종교적 전통/신념)' },
+        { word: 'economic', pos: '형', meaning: '경제의', point: false, colloc: 'economic growth (경제적 성장)' },
+        { word: 'positively', pos: '부', meaning: '긍정적으로', point: false, colloc: 'contribute positively (긍정적으로 기여하다)' },
+        { word: 'contribute to ~', pos: 'phr.', meaning: '~의 요인이 되다', point: false, colloc: 'contribute to local economy (지역 경제에 기여하다)' },
+        { word: 'book', pos: '동', meaning: '예약하다', point: false, colloc: 'book a flight / hotel (항공편/호텔을 예약하다)' },
+        { word: 'suggestion', pos: '명', meaning: '제안', point: true, colloc: 'make a suggestion (제안을 하다)' },
+        { word: 'ban', pos: '동', meaning: '금지하다', point: true, colloc: 'ban smoking / plastic (흡연/플라스틱 사용을 금지하다)' }
       ],
       5: [
-        { word: 'unique', pos: '형', meaning: '독특한', point: false },
-        { word: 'portrait', pos: '명', meaning: '초상화', point: true },
-        { word: 'sculpture', pos: '명', meaning: '조각품', point: true },
-        { word: 'initially', pos: '부', meaning: '처음에', point: false },
-        { word: 'appropriate', pos: '형', meaning: '적절한', point: true },
-        { word: 'chin', pos: '명', meaning: '턱', point: true },
-        { word: 'performance', pos: '명', meaning: '공연', point: false },
-        { word: 'actor', pos: '명', meaning: '배우', point: false },
-        { word: 'actress', pos: '명', meaning: '여배우', point: false },
-        { word: 'play', pos: '동', meaning: '연기하다', point: false },
-        { word: 'acting', pos: '명', meaning: '연기', point: false },
-        { word: 'scene', pos: '명', meaning: '장면', point: false },
-        { word: 'perform', pos: '동', meaning: '공연하다', point: false },
-        { word: 'find out', pos: 'phr.', meaning: '알아내다', point: false },
-        { word: 'drip', pos: '동', meaning: '(액체)를 뚝뚝 떨어뜨리다', point: false },
-        { word: 'pour', pos: '동', meaning: '(액체)를 따르다, 붓다', point: false },
-        { word: 'facial', pos: '형', meaning: '얼굴의', point: true },
-        { word: 'expression', pos: '명', meaning: '표정', point: false },
-        { word: 'reveal', pos: '동', meaning: '드러내다, 밝히다', point: false },
-        { word: 'anxiety', pos: '명', meaning: '불안, 근심', point: true },
-        { word: 'familiar with ~', pos: 'phr.', meaning: '~에 익숙한', point: false }
+        { word: 'unique', pos: '형', meaning: '독특한', point: false, colloc: 'a unique style (독특한 스타일)' },
+        { word: 'portrait', pos: '명', meaning: '초상화', point: true, colloc: 'paint a self-portrait (자화상을 그리다)' },
+        { word: 'sculpture', pos: '명', meaning: '조각품', point: true, colloc: 'stone / marble sculpture (돌/대리석 조각품)' },
+        { word: 'initially', pos: '부', meaning: '처음에', point: false, colloc: 'initially planned (처음에 계획되었던)' },
+        { word: 'appropriate', pos: '형', meaning: '적절한', point: true, colloc: 'appropriate behavior (상황에 적절한 행동)' },
+        { word: 'chin', pos: '명', meaning: '턱', point: true, colloc: 'rest one’s chin on a hand (턱을 괴다)' },
+        { word: 'performance', pos: '명', meaning: '공연', point: false, colloc: 'live performance (라이브 공연)' },
+        { word: 'actor', pos: '명', meaning: '배우', point: false, colloc: 'lead actor (주연 배우)' },
+        { word: 'actress', pos: '명', meaning: '여배우', point: false, colloc: 'talented actress (재능 있는 여배우)' },
+        { word: 'play', pos: '동', meaning: '연기하다', point: false, colloc: 'play a role (역할을 연기하다)' },
+        { word: 'acting', pos: '명', meaning: '연기', point: false, colloc: 'acting skills (연기력)' },
+        { word: 'scene', pos: '명', meaning: '장면', point: false, colloc: 'the final scene (마지막 장면)' },
+        { word: 'perform', pos: '동', meaning: '공연하다', point: false, colloc: 'perform on stage (무대에서 공연하다)' },
+        { word: 'find out', pos: 'phr.', meaning: '알아내다', point: false, colloc: 'find out the truth (진실을 알아내다)' },
+        { word: 'drip', pos: '동', meaning: '(액체)를 뚝뚝 떨어뜨리다', point: false, colloc: 'drip paint onto canvas (캔버스에 물감을 떨어뜨리다)' },
+        { word: 'pour', pos: '동', meaning: '(액체)를 따르다, 붓다', point: false, colloc: 'pour paint (페인트를 붓다)' },
+        { word: 'facial', pos: '형', meaning: '얼굴의', point: true, colloc: 'facial expression (얼굴 표정)' },
+        { word: 'expression', pos: '명', meaning: '표정', point: false, colloc: 'facial expression (표정)' },
+        { word: 'reveal', pos: '동', meaning: '드러내다, 밝히다', point: false, colloc: 'reveal true emotions (진짜 감정을 드러내다)' },
+        { word: 'anxiety', pos: '명', meaning: '불안, 근심', point: true, colloc: 'reduce anxiety (불안감을 줄이다)' },
+        { word: 'familiar with ~', pos: 'phr.', meaning: '~에 익숙한', point: false, colloc: 'be familiar with the artist (그 예술가에 익숙하다)' }
       ],
       6: [
-        { word: 'throughout', pos: 'phr.', meaning: '~ 동안 내내, ~을 통틀어', point: false },
-        { word: 'communicate', pos: '동', meaning: '소통하다', point: false },
-        { word: 'a range of ~', pos: 'phr.', meaning: '다양한 ~', point: false },
-        { word: 'theme', pos: '명', meaning: '주제', point: false },
-        { word: 'artwork', pos: '명', meaning: '예술 작품', point: false },
-        { word: 'working class', pos: 'phr.', meaning: '노동자 계층', point: true },
-        { word: 'rural', pos: '형', meaning: '시골의', point: true },
-        { word: 'portray', pos: '동', meaning: '묘사하다, 나타내다', point: true },
-        { word: 'peacefulness', pos: '명', meaning: '평화로움', point: false },
-        { word: 'landscape', pos: '명', meaning: '풍경', point: false },
-        { word: 'pond', pos: '명', meaning: '연못', point: true },
-        { word: 'gallery', pos: '명', meaning: '미술관', point: false },
-        { word: 'witness', pos: '동', meaning: '목격하다', point: false },
-        { word: 'characteristic', pos: '명', meaning: '특징', point: false },
-        { word: 'exclude', pos: '동', meaning: '제외하다', point: false },
-        { word: 'instead', pos: '부', meaning: '대신에', point: false },
-        { word: 'warmth', pos: '명', meaning: '온기, 따뜻함', point: true },
-        { word: 'vivid', pos: '형', meaning: '생생한, 선명한', point: true },
-        { word: 'realistic', pos: '형', meaning: '사실적인', point: false },
-        { word: 'pose', pos: '명', meaning: '자세, 포즈', point: false }
+        { word: 'throughout', pos: 'phr.', meaning: '~ 동안 내내, ~을 통틀어', point: false, colloc: 'throughout history (역사를 통틀어)' },
+        { word: 'communicate', pos: '동', meaning: '소통하다', point: false, colloc: 'communicate ideas (생각을 소통/전달하다)' },
+        { word: 'a range of ~', pos: 'phr.', meaning: '다양한 ~', point: false, colloc: 'a wide range of colors (다양한 색채)' },
+        { word: 'theme', pos: '명', meaning: '주제', point: false, colloc: 'the main theme (주요 주제)' },
+        { word: 'artwork', pos: '명', meaning: '예술 작품', point: false, colloc: 'original artwork (독창적인 예술 작품)' },
+        { word: 'working class', pos: 'phr.', meaning: '노동자 계층', point: true, colloc: 'the lives of the working class (노동자 계층의 삶)' },
+        { word: 'rural', pos: '형', meaning: '시골의', point: true, colloc: 'rural life / area (시골의 삶/지역)' },
+        { word: 'portray', pos: '동', meaning: '묘사하다, 나타내다', point: true, colloc: 'portray daily life (일상 생활을 묘사하다)' },
+        { word: 'peacefulness', pos: '명', meaning: '평화로움', point: false, colloc: 'a sense of peacefulness (평화로운 느낌)' },
+        { word: 'landscape', pos: '명', meaning: '풍경', point: false, colloc: 'paint a landscape (풍경화를 그리다)' },
+        { word: 'pond', pos: '명', meaning: '연못', point: true, colloc: 'a pond surrounded by trees (나무로 둘러싸인 연못)' },
+        { word: 'gallery', pos: '명', meaning: '미술관', point: false, colloc: 'art gallery (미술관)' },
+        { word: 'witness', pos: '동', meaning: '목격하다', point: false, colloc: 'witness a historical moment (역사적 순간을 목격하다)' },
+        { word: 'characteristic', pos: '명', meaning: '특징', point: false, colloc: 'main characteristic (주요 특징)' },
+        { word: 'exclude', pos: '동', meaning: '제외하다', point: false, colloc: 'exclude from the list (목록에서 제외하다)' },
+        { word: 'instead', pos: '부', meaning: '대신에', point: false, colloc: 'use bright colors instead (대신 밝은 색을 사용하다)' },
+        { word: 'warmth', pos: '명', meaning: '온기, 따뜻함', point: true, colloc: 'warmth of the sun (태양의 온기)' },
+        { word: 'vivid', pos: '형', meaning: '생생한, 선명한', point: true, colloc: 'vivid colors (선명하고 생생한 색감)' },
+        { word: 'realistic', pos: '형', meaning: '사실적인', point: false, colloc: 'realistic drawing (사실적인 그림)' },
+        { word: 'pose', pos: '명', meaning: '자세, 포즈', point: false, colloc: 'strike a pose (포즈를 취하다)' }
       ],
       7: [
-        { word: 'exhibition', pos: '명', meaning: '전시회', point: true },
-        { word: 'press', pos: '명', meaning: '언론, 신문과 잡지', point: true },
-        { word: 'illustrator', pos: '명', meaning: '삽화가', point: true },
-        { word: 'produce', pos: '동', meaning: '(작품·음식 등)을 만들어 내다', point: false },
-        { word: 'cover', pos: '명', meaning: '표지', point: false },
-        { word: 'issue', pos: '명', meaning: '문제', point: false },
-        { word: 'identity', pos: '명', meaning: '정체성, 신원', point: true },
-        { word: 'representative', pos: '형', meaning: '대표적인', point: true },
-        { word: 'quite', pos: '부', meaning: '꽤', point: false },
-        { word: 'tender', pos: '형', meaning: '다정한, 부드러운', point: true },
-        { word: 'face', pos: '동', meaning: '~을 마주보다[향하다]', point: false },
-        { word: 'hold ~ up', pos: 'phr.', meaning: '~을 들어 올리다', point: false },
-        { word: 'examine', pos: '동', meaning: '진찰하다, 검사하다', point: true },
-        { word: 'go along with ~', pos: 'phr.', meaning: '~의 의견에 따르다', point: false },
-        { word: 'pretend', pos: '동', meaning: '~인 척하다', point: true },
-        { word: 'treat', pos: '동', meaning: '~을 대하다', point: false },
-        { word: 'appreciate', pos: '동', meaning: '감상하다, 진가를 알아보다', point: true },
-        { word: 'innocence', pos: '명', meaning: '순진함, 천진', point: true },
-        { word: 'evoke', pos: '동', meaning: '(생각, 감정 등을) 불러일으키다', point: true },
-        { word: 'piece', pos: '명', meaning: '작품', point: false },
-        { word: 'guard', pos: '동', meaning: '~을 보호하다', point: false },
-        { word: 'smash', pos: '동', meaning: '부수다, 박살내다', point: true },
-        { word: 'stain', pos: '동', meaning: '얼룩지게 하다', point: true },
-        { word: 'catch', pos: '동', meaning: '(주의·관심 등)을 사로잡다', point: false },
-        { word: 'contemporary', pos: '형', meaning: '동시대의, 그 당시의', point: true },
-        { word: 'describe', pos: '동', meaning: '묘사하다', point: false }
+        { word: 'exhibition', pos: '명', meaning: '전시회', point: true, colloc: 'hold an exhibition (전시회를 열다)' },
+        { word: 'press', pos: '명', meaning: '언론, 신문과 잡지', point: true, colloc: 'freedom of the press (언론의 자유)' },
+        { word: 'illustrator', pos: '명', meaning: '삽화가', point: true, colloc: 'a famous illustrator (유명한 삽화가)' },
+        { word: 'produce', pos: '동', meaning: '(작품·음식 등)을 만들어 내다', point: false, colloc: 'produce a masterpiece (명작을 탄생시키다)' },
+        { word: 'cover', pos: '명', meaning: '표지', point: false, colloc: 'magazine cover (잡지 표지)' },
+        { word: 'issue', pos: '명', meaning: '문제', point: false, colloc: 'social issue (사회적 이슈/문제)' },
+        { word: 'identity', pos: '명', meaning: '정체성, 신원', point: true, colloc: 'cultural identity (문화적 정체성)' },
+        { word: 'representative', pos: '형', meaning: '대표적인', point: true, colloc: 'a representative work (대표적인 작품)' },
+        { word: 'quite', pos: '부', meaning: '꽤', point: false, colloc: 'quite impressive (꽤 인상적인)' },
+        { word: 'tender', pos: '형', meaning: '다정한, 부드러운', point: true, colloc: 'a tender smile (다정한 미소)' },
+        { word: 'face', pos: '동', meaning: '~을 마주보다[향하다]', point: false, colloc: 'face a challenge (도전에 직면하다/마주하다)' },
+        { word: 'hold ~ up', pos: 'phr.', meaning: '~을 들어 올리다', point: false, colloc: 'hold up a picture (그림을 들어 올리다)' },
+        { word: 'examine', pos: '동', meaning: '진찰하다, 검사하다', point: true, colloc: 'examine closely (면밀히 조사/진찰하다)' },
+        { word: 'go along with ~', pos: 'phr.', meaning: '~의 의견에 따르다', point: false, colloc: 'go along with the idea (그 생각에 동조하다)' },
+        { word: 'pretend', pos: '동', meaning: '~인 척하다', point: true, colloc: 'pretend to know (~을 아는 체하다)' },
+        { word: 'treat', pos: '동', meaning: '~을 대하다', point: false, colloc: 'treat with respect (존중하며 대하다)' },
+        { word: 'appreciate', pos: '동', meaning: '감상하다, 진가를 알아보다', point: true, colloc: 'appreciate fine art (순수 예술을 감상하다)' },
+        { word: 'innocence', pos: '명', meaning: '순진함, 천진', point: true, colloc: 'childhood innocence (어린 시절의 순진무구함)' },
+        { word: 'evoke', pos: '동', meaning: '(생각, 감정 등을) 불러일으키다', point: true, colloc: 'evoke memories / feelings (추억/감정을 불러일으키다)' },
+        { word: 'piece', pos: '명', meaning: '작품', point: false, colloc: 'a piece of art (예술 작품 한 점)' },
+        { word: 'guard', pos: '동', meaning: '~을 보호하다', point: false, colloc: 'guard against damage (손상으로부터 보호하다)' },
+        { word: 'smash', pos: '동', meaning: '부수다, 박살내다', point: true, colloc: 'smash into pieces (산산조각 내다)' },
+        { word: 'stain', pos: '동', meaning: '얼룩지게 하다', point: true, colloc: 'stain the canvas (캔버스에 얼룩을 남기다)' },
+        { word: 'catch', pos: '동', meaning: '(주의·관심 등)을 사로잡다', point: false, colloc: 'catch one’s eye / attention (시선/주의를 사로잡다)' },
+        { word: 'contemporary', pos: '형', meaning: '동시대의, 그 당시의', point: true, colloc: 'contemporary art (현대/동시대 미술)' },
+        { word: 'describe', pos: '동', meaning: '묘사하다', point: false, colloc: 'describe in detail (상세히 묘사하다)' }
       ],
       8: [
-        { word: 'segregation', pos: '명', meaning: '분리, 차별', point: true },
-        { word: 'racism', pos: '명', meaning: '인종 차별(주의)', point: true },
-        { word: 'inspire', pos: '동', meaning: '영감을 주다', point: true },
-        { word: 'historic', pos: '형', meaning: '역사적인, 역사상 중요한', point: false },
-        { word: 'the Supreme Court', pos: '명', meaning: '대법원', point: false },
-        { word: 'rule', pos: '동', meaning: '~에 대해 판결을 내리다', point: false },
-        { word: 'unconstitutional', pos: '형', meaning: '헌법에 위배되는', point: true },
-        { word: 'protest', pos: '동', meaning: '항의하다, 반대하다', point: true },
-        { word: 'enrollment', pos: '명', meaning: '입학, 등록', point: true },
-        { word: 'the Civil Rights Movement', pos: '명', meaning: '시민 인권 운동', point: false },
-        { word: 'connoisseur', pos: '명', meaning: '감정가, 감정사', point: false },
-        { word: 'abstract', pos: '형', meaning: '추상적인', point: true },
-        { word: 'typical', pos: '형', meaning: '전형적인', point: false },
-        { word: 'splash', pos: '명', meaning: '(액체 등의) 방울, 얼룩', point: true },
-        { word: 'critic', pos: '명', meaning: '비평가', point: false },
-        { word: 'fascinate', pos: '동', meaning: '매료시키다', point: false },
-        { word: 'devalue', pos: '동', meaning: '평가 절하하다', point: true },
-        { word: 'hang', pos: '동', meaning: '걸다', point: false },
-        { word: 'drip', pos: '명', meaning: '(액체의) 떨어짐', point: false },
-        { word: 'modernist', pos: '형', meaning: '모더니즘의, 근대주의의', point: false },
-        { word: 'combine', pos: '동', meaning: '결합하다', point: true },
-        { word: 'highlight', pos: '동', meaning: '강조하다', point: false },
-        { word: 'rear', pos: '명', meaning: '뒤쪽', point: true },
-        { word: 'interpretation', pos: '명', meaning: '해석', point: true },
-        { word: 'grasp', pos: '동', meaning: '파악하다', point: true },
-        { word: 'intention', pos: '명', meaning: '의도', point: true }
+        { word: 'segregation', pos: '명', meaning: '분리, 차별', point: true, colloc: 'racial segregation (인종 분리 및 차별)' },
+        { word: 'racism', pos: '명', meaning: '인종 차별(주의)', point: true, colloc: 'fight against racism (인종차별에 맞서 싸우다)' },
+        { word: 'inspire', pos: '동', meaning: '영감을 주다', point: true, colloc: 'inspire others to act (다른 사람들에게 행동할 영감을 주다)' },
+        { word: 'historic', pos: '형', meaning: '역사적인, 역사상 중요한', point: false, colloc: 'a historic decision (역사적인 결정)' },
+        { word: 'the Supreme Court', pos: '명', meaning: '대법원', point: false, colloc: 'ruling of the Supreme Court (대법원 판결)' },
+        { word: 'rule', pos: '동', meaning: '~에 대해 판결을 내리다', point: false, colloc: 'rule that ~ (~라고 판결하다)' },
+        { word: 'unconstitutional', pos: '형', meaning: '헌법에 위배되는', point: true, colloc: 'declare unconstitutional (위헌 판결을 내리다)' },
+        { word: 'protest', pos: '동', meaning: '항의하다, 반대하다', point: true, colloc: 'protest against inequality (불평등에 항의하다)' },
+        { word: 'enrollment', pos: '명', meaning: '입학, 등록', point: true, colloc: 'school enrollment (학교 등록/입학)' },
+        { word: 'the Civil Rights Movement', pos: '명', meaning: '시민 인권 운동', point: false, colloc: 'leader of the Civil Rights Movement (인권운동 지도자)' },
+        { word: 'connoisseur', pos: '명', meaning: '감정가, 감정사', point: false, colloc: 'an art connoisseur (미술 감정 전문가)' },
+        { word: 'abstract', pos: '형', meaning: '추상적인', point: true, colloc: 'abstract painting (추상화)' },
+        { word: 'typical', pos: '형', meaning: '전형적인', point: false, colloc: 'a typical example (전형적인 예시)' },
+        { word: 'splash', pos: '명', meaning: '(액체 등의) 방울, 얼룩', point: true, colloc: 'splashes of color (색채의 얼룩/방울)' },
+        { word: 'critic', pos: '명', meaning: '비평가', point: false, colloc: 'art / movie critic (미술/영화 평론가)' },
+        { word: 'fascinate', pos: '동', meaning: '매료시키다', point: false, colloc: 'be fascinated by ~ (~에 매료되다)' },
+        { word: 'devalue', pos: '동', meaning: '평가 절하하다', point: true, colloc: 'devalue one’s achievements (업적을 깎아내리다)' },
+        { word: 'hang', pos: '동', meaning: '걸다', point: false, colloc: 'hang a painting on the wall (벽에 그림을 걸다)' },
+        { word: 'drip', pos: '명', meaning: '(액체의) 떨어짐', point: false, colloc: 'drip technique (드리핑/물감 떨어뜨리기 기법)' },
+        { word: 'modernist', pos: '형', meaning: '모더니즘의, 근대주의의', point: false, colloc: 'modernist movement (모더니즘 운동)' },
+        { word: 'combine', pos: '동', meaning: '결합하다', point: true, colloc: 'combine A with B (A와 B를 결합하다)' },
+        { word: 'highlight', pos: '동', meaning: '강조하다', point: false, colloc: 'highlight the social issues (사회적 문제를 강조하다)' },
+        { word: 'rear', pos: '명', meaning: '뒤쪽', point: true, colloc: 'at the rear of ~ (~의 뒤쪽에)' },
+        { word: 'interpretation', pos: '명', meaning: '해석', point: true, colloc: 'open to interpretation (다양한 해석이 가능한)' },
+        { word: 'grasp', pos: '동', meaning: '파악하다', point: true, colloc: 'grasp the main point (요점을 파악하다)' },
+        { word: 'intention', pos: '명', meaning: '의도', point: true, colloc: 'the artist’s original intention (작가의 본래 의도)' }
       ],
       9: [
-        { word: 'refer to ~', pos: 'phr.', meaning: '~을 나타내다', point: false },
-        { word: 'display', pos: '동', meaning: '전시하다; 전시', point: false },
-        { word: 'device', pos: '명', meaning: '장치', point: false },
-        { word: 'format', pos: '명', meaning: '형식, 구성 방식', point: false },
-        { word: 'emerge', pos: '동', meaning: '등장하다', point: false },
-        { word: 'evolutionary', pos: '형', meaning: '진화적인, 발전의', point: true },
-        { word: 'progress', pos: '명', meaning: '진보, 발전', point: false },
-        { word: 'sharply', pos: '부', meaning: '뚜렷하게, 분명하게', point: false },
-        { word: 'contrast', pos: '동', meaning: '대조하다', point: true },
-        { word: 'entirely', pos: '부', meaning: '전적으로, 완전히', point: false },
-        { word: 'conventional', pos: '형', meaning: '전통적인, 관습적인', point: true },
-        { word: 'perspective', pos: '명', meaning: '관점', point: true },
-        { word: 'expand', pos: '동', meaning: '확장시키다', point: false },
-        { word: 'territory', pos: '명', meaning: '영역, 분야', point: true },
-        { word: 'edit', pos: '동', meaning: '편집하다', point: false },
-        { word: 'digitally', pos: '부', meaning: '디지털 방식으로', point: false },
-        { word: 'incorporate', pos: '동', meaning: '포함하다', point: true },
-        { word: 'presence', pos: '명', meaning: '존재, 있음', point: true },
-        { word: 'figure', pos: '명', meaning: '인물, 모습', point: true },
-        { word: 'on the other hand', pos: 'phr.', meaning: '반면에', point: true }
+        { word: 'refer to ~', pos: 'phr.', meaning: '~을 나타내다', point: false, colloc: 'refer to the term (~라는 용어를 지칭하다)' },
+        { word: 'display', pos: '동', meaning: '전시하다; 전시', point: false, colloc: 'display on a screen (화면에 전시/표시하다)' },
+        { word: 'device', pos: '명', meaning: '장치', point: false, colloc: 'electronic device (전자기기)' },
+        { word: 'format', pos: '명', meaning: '형식, 구성 방식', point: false, colloc: 'digital format (디지털 형식)' },
+        { word: 'emerge', pos: '동', meaning: '등장하다', point: false, colloc: 'new technologies emerge (신기술이 등장하다)' },
+        { word: 'evolutionary', pos: '형', meaning: '진화적인, 발전의', point: true, colloc: 'evolutionary step (진화적 단계)' },
+        { word: 'progress', pos: '명', meaning: '진보, 발전', point: false, colloc: 'make rapid progress (급속한 발전을 이루다)' },
+        { word: 'sharply', pos: '부', meaning: '뚜렷하게, 분명하게', point: false, colloc: 'contrast sharply (극명한 대조를 이루다)' },
+        { word: 'contrast', pos: '동', meaning: '대조하다', point: true, colloc: 'contrast with the past (과거와 대조를 이루다)' },
+        { word: 'entirely', pos: '부', meaning: '전적으로, 완전히', point: false, colloc: 'an entirely new form (완전히 새로운 형태)' },
+        { word: 'conventional', pos: '형', meaning: '전통적인, 관습적인', point: true, colloc: 'conventional art forms (전통적인 예술 형식)' },
+        { word: 'perspective', pos: '명', meaning: '관점', point: true, colloc: 'from a fresh perspective (새로운 관점에서)' },
+        { word: 'expand', pos: '동', meaning: '확장시키다', point: false, colloc: 'expand the boundaries (경계를 확장하다)' },
+        { word: 'territory', pos: '명', meaning: '영역, 분야', point: true, colloc: 'unexplored territory (미개척 영역)' },
+        { word: 'edit', pos: '동', meaning: '편집하다', point: false, colloc: 'edit digital images (디지털 이미지를 편집하다)' },
+        { word: 'digitally', pos: '부', meaning: '디지털 방식으로', point: false, colloc: 'digitally altered (디지털로 수정된)' },
+        { word: 'incorporate', pos: '동', meaning: '포함하다', point: true, colloc: 'incorporate A into B (~을 …에 포함/통합시키다)' },
+        { word: 'presence', pos: '명', meaning: '존재, 있음', point: true, colloc: 'strong presence (강렬한 존재감)' },
+        { word: 'figure', pos: '명', meaning: '인물, 모습', point: true, colloc: 'historical / key figure (역사적/핵심 인물)' },
+        { word: 'on the other hand', pos: 'phr.', meaning: '반면에', point: true, colloc: 'On the other hand, however (반면에, 그렇지만)' }
       ]
     };
 
@@ -1136,7 +1148,7 @@
         const card = document.createElement('div');
         const isDifficult = item.difficult;
 
-        card.className = `p-4 rounded-xl shadow-xs border transition-all flex items-center justify-between gap-3 ${
+        card.className = `p-4 rounded-xl shadow-xs border transition-all flex flex-col gap-2 ${
           isDifficult 
             ? 'bg-error-container/70 border-error/20 text-on-error-container' 
             : item.point 
@@ -1145,42 +1157,51 @@
         }`;
 
         card.innerHTML = `
-          <div class="flex flex-col gap-1 flex-1 min-w-0 cursor-pointer word-detail-area">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-base sm:text-lg font-bold tracking-tight">${item.word}</span>
-              ${item.pos ? `
-                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-                  isDifficult ? 'bg-surface-white/60 text-on-error-container' : 'bg-surface-container text-on-surface-variant'
-                }">${item.pos}</span>
-              ` : ''}
-              ${item.point ? `
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-school-bg text-school-text border border-indigo-200 flex items-center gap-1">
-                  <span class="material-symbols-outlined text-[13px]">school</span> 학습지
-                </span>
-              ` : ''}
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex flex-col gap-1 flex-1 min-w-0 cursor-pointer word-detail-area">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-base sm:text-lg font-bold tracking-tight">${item.word}</span>
+                ${item.pos ? `
+                  <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                    isDifficult ? 'bg-surface-white/60 text-on-error-container' : 'bg-surface-container text-on-surface-variant'
+                  }">${item.pos}</span>
+                ` : ''}
+                ${item.point ? `
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-school-bg text-school-text border border-indigo-200 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[13px]">school</span> 학습지
+                  </span>
+                ` : ''}
+              </div>
+              <span class="text-sm font-normal truncate ${
+                isDifficult ? 'text-on-error-container/90' : 'text-text-secondary'
+              } meaning-text ${hideMeanings ? 'opacity-0 select-none' : 'opacity-100'} transition-opacity">
+                ${item.meaning}
+              </span>
             </div>
-            <span class="text-sm font-normal truncate ${
-              isDifficult ? 'text-on-error-container/90' : 'text-text-secondary'
-            } meaning-text ${hideMeanings ? 'opacity-0 select-none' : 'opacity-100'} transition-opacity">
-              ${item.meaning}
-            </span>
+
+            <div class="flex items-center gap-1 shrink-0">
+              <button class="btn-tts w-9 h-9 rounded-full flex items-center justify-center hover:bg-black/5 transition-colors text-on-surface-variant" title="발음 듣기">
+                <span class="material-symbols-outlined text-[18px]">volume_up</span>
+              </button>
+              <button class="btn-star w-9 h-9 rounded-full flex items-center justify-center hover:bg-amber-100/50 transition-colors ${
+                item.starred ? 'text-warning' : 'text-outline'
+              }" title="내 중요 단어로 별표 북마크">
+                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' ${item.starred ? 1 : 0};">star</span>
+              </button>
+              <button class="btn-check w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+                isDifficult ? 'bg-error text-surface-white shadow-xs' : 'hover:bg-error-container hover:text-error text-outline'
+              }" title="복습 필요 단어로 체크">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 600;">check</span>
+              </button>
+            </div>
           </div>
 
-          <div class="flex items-center gap-1 shrink-0">
-            <button class="btn-tts w-9 h-9 rounded-full flex items-center justify-center hover:bg-black/5 transition-colors text-on-surface-variant" title="발음 듣기">
-              <span class="material-symbols-outlined text-[18px]">volume_up</span>
-            </button>
-            <button class="btn-star w-9 h-9 rounded-full flex items-center justify-center hover:bg-amber-100/50 transition-colors ${
-              item.starred ? 'text-warning' : 'text-outline'
-            }" title="내 중요 단어로 별표 북마크">
-              <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' ${item.starred ? 1 : 0};">star</span>
-            </button>
-            <button class="btn-check w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-              isDifficult ? 'bg-error text-surface-white shadow-xs' : 'hover:bg-error-container hover:text-error text-outline'
-            }" title="복습 필요 단어로 체크">
-              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 600;">check</span>
-            </button>
-          </div>
+          ${item.colloc ? `
+            <div class="pt-2 border-t border-surface-container/60 flex items-center gap-1.5 text-[11px] text-text-secondary">
+              <span class="px-1.5 py-0.5 rounded bg-surface-container text-primary font-bold text-[10px] shrink-0">연관 표현</span>
+              <span class="truncate font-medium text-text-primary/90">${item.colloc}</span>
+            </div>
+          ` : ''}
         `;
 
         card.querySelector('.word-detail-area').addEventListener('click', () => {
@@ -1245,6 +1266,16 @@
       } else {
         pointBadge.classList.add('hidden');
         pointBadge.classList.remove('flex');
+      }
+
+      // Collocation Display on back
+      const fcCollocBox = document.getElementById('fc-colloc-box');
+      const fcCollocText = document.getElementById('fc-colloc-text');
+      if (item.colloc) {
+        fcCollocText.textContent = item.colloc;
+        fcCollocBox.classList.remove('hidden');
+      } else {
+        fcCollocBox.classList.add('hidden');
       }
 
       const progressRatio = ((currentTestIndex + 1) / testWordList.length) * 100;
@@ -1373,7 +1404,8 @@
       container.classList.add('pointer-events-none');
 
       const hintEl = document.getElementById('choice-card-feedback-hint');
-      hintEl.textContent = `${currentItem.word} : ${currentItem.meaning}`;
+      const collocInfo = currentItem.colloc ? ` (${currentItem.colloc})` : '';
+      hintEl.textContent = `${currentItem.word} : ${currentItem.meaning}${collocInfo}`;
       hintEl.classList.remove('opacity-0');
 
       if (isCorrect) {
@@ -1502,16 +1534,17 @@
 
       const isCorrect = userText === targetText;
       const descEl = document.getElementById('typing-feedback-desc');
+      const collocInfo = currentItem.colloc ? ` <br/><span class="text-[11px] text-text-secondary mt-0.5 inline-block">💡 ${currentItem.colloc}</span>` : '';
 
       if (isCorrect) {
         testScore += 10;
         testResults.correct++;
         currentItem.difficult = false;
-        descEl.innerHTML = `<span class="text-success font-bold">정답입니다!</span> (정답: <strong>${currentItem.word}</strong>)`;
+        descEl.innerHTML = `<span class="text-success font-bold">정답입니다!</span> (정답: <strong>${currentItem.word}</strong>)${collocInfo}`;
       } else {
         testResults.wrong++;
         currentItem.difficult = true;
-        descEl.innerHTML = `<span class="text-error font-bold">오답입니다.</span> (정답: <strong>${currentItem.word}</strong>)`;
+        descEl.innerHTML = `<span class="text-error font-bold">오답입니다.</span> (정답: <strong>${currentItem.word}</strong>)${collocInfo}`;
       }
 
       saveUserData();
