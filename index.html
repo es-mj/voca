@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
-  <title>🍫 vocabulary for JH 🍓</title>
+  <title>vocabulary for JH</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 
@@ -66,8 +66,7 @@
             "text-secondary": "#64748B"
           },
           spacing: {
-            "container-margin": "20px",
-            "card-gap": "12px"
+            "container-margin": "16px"
           }
         }
       }
@@ -76,16 +75,16 @@
 </head>
 <body class="bg-surface text-on-surface select-none">
 
-  <!-- Main Top Header -->
   <header class="fixed top-0 inset-x-0 z-40 bg-surface/90 backdrop-blur-xl pt-safe border-b border-surface-container">
-    <div class="h-14 px-container-margin flex items-center justify-between max-w-[600px] mx-auto w-full">
-      <div class="flex items-center gap-3">
-        <button id="btn-open-drawer" class="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-surface-container transition-colors active:scale-95" aria-label="Open Day Menu">
-          <span class="material-symbols-outlined text-on-surface-variant">menu</span>
+    <div class="h-14 px-container-margin flex items-center justify-between max-w-[640px] mx-auto w-full">
+      <div class="flex items-center gap-2.5">
+        <!-- Return to Home Button (Visible only when inside a Day) -->
+        <button id="header-btn-home" class="hidden w-9 h-9 items-center justify-center rounded-full hover:bg-surface-container text-on-surface-variant active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <div class="flex flex-col">
-          <span id="header-day-label" class="text-xs font-bold text-primary tracking-wide">HOME</span>
-          <h1 id="header-title" class="text-lg font-bold text-on-surface leading-tight">🍫 vocabulary for JH 🍓</h1>
+          <span id="header-day-label" class="text-[11px] font-bold text-primary tracking-wide">HOME</span>
+          <h1 id="header-title" class="text-base sm:text-lg font-bold text-on-surface leading-tight">vocabulary for JH</h1>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -97,100 +96,78 @@
     </div>
   </header>
 
-  <!-- Day Selection Drawer (Day 1 ~ 9) -->
-  <aside id="day-drawer" class="fixed inset-0 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
-    <div id="drawer-backdrop" class="absolute inset-0 bg-on-surface/30 backdrop-blur-xs"></div>
-    <nav class="relative w-72 max-w-[80vw] h-full bg-surface-white shadow-2xl flex flex-col pt-safe">
-      <div class="p-5 border-b border-surface-container flex items-center justify-between">
-        <div>
-          <span class="text-xs font-bold text-primary uppercase">Study Plan (9 Days)</span>
-          <h2 class="text-xl font-bold text-text-primary">일자 선택</h2>
-        </div>
-        <button id="btn-close-drawer" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container text-on-surface-variant">
-          <span class="material-symbols-outlined text-sm">close</span>
-        </button>
-      </div>
-      <div class="p-3 border-b border-surface-container">
-        <button id="drawer-btn-home" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-sm font-bold text-text-primary transition-colors">
-          <span class="material-symbols-outlined text-primary text-xl">home</span>
-          홈 화면으로 이동
-        </button>
-      </div>
-      <div class="flex-1 overflow-y-auto p-4 space-y-1.5 no-scrollbar" id="day-list-container">
-        <!-- Rendered via JS -->
-      </div>
-    </nav>
-  </aside>
-
-  <!-- Main Container -->
-  <main class="flex-1 pt-16 pb-24 px-container-margin max-w-[600px] mx-auto w-full">
+  <main id="main-container" class="flex-1 pt-16 pb-8 px-container-margin max-w-[640px] mx-auto w-full transition-all">
     
     <!-- ========================================== -->
     <!-- VIEW 0: HOME DASHBOARD (홈 화면) -->
     <!-- ========================================== -->
-    <div id="view-home" class="flex flex-col gap-5 mt-2">
-      <!-- Greeting Banner -->
-      <div class="bg-gradient-to-br from-primary via-primary-container to-blue-700 p-6 rounded-3xl shadow-md text-on-primary relative overflow-hidden">
+    <div id="view-home" class="flex flex-col gap-4.5 mt-2">
+      <!-- Greeting Banner (Compact without action buttons) -->
+      <div class="bg-gradient-to-br from-primary via-primary-container to-blue-700 p-5 sm:p-6 rounded-3xl shadow-sm text-on-primary relative overflow-hidden">
         <div class="flex flex-col gap-1.5 z-10 relative">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-white/20 backdrop-blur-md w-fit text-xs font-bold tracking-wide">
             <span class="material-symbols-outlined text-sm text-amber-300" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
             중간고사 완벽 대비
           </div>
-          <h2 class="text-2xl sm:text-3xl font-bold mt-1">오늘의 영단어 학습</h2>
-          <p class="text-xs sm:text-sm text-on-primary/85 leading-relaxed">
-            Day 1부터 Day 9까지 총 243개 단어와 학교 학습지 핵심 어휘, 연관 숙어를 단계별로 마스터하세요.
+          <h2 class="text-xl sm:text-2xl font-bold mt-1">오늘의 영단어 학습</h2>
+          <p id="home-banner-desc" class="text-xs sm:text-sm text-on-primary/85 leading-relaxed">
+            교과서(Day 1~9)와 모의고사(Day 10~15) 총 493개 단어를 학습할 일자를 아래에서 탭하세요.
           </p>
         </div>
-        
-        <div class="mt-5 flex gap-2 z-10 relative">
-          <button id="btn-home-quick-start" class="flex-1 h-11 bg-surface-white text-primary font-bold text-xs rounded-xl shadow-sm hover:bg-surface-white/95 active:scale-98 transition-transform flex items-center justify-center gap-1.5">
-            <span class="material-symbols-outlined text-base">play_arrow</span>
-            <span id="home-quick-label">Day 1 바로 시작</span>
-          </button>
-          <button id="btn-home-test-start" class="px-4 h-11 bg-surface-white/20 hover:bg-surface-white/30 backdrop-blur-md text-surface-white font-bold text-xs rounded-xl active:scale-98 transition-transform flex items-center justify-center gap-1">
-            <span class="material-symbols-outlined text-base">quiz</span>
-            테스트
-          </button>
-        </div>
-        
-        <div class="absolute -right-6 -bottom-6 w-36 h-36 bg-surface-white/10 rounded-full blur-xl pointer-events-none"></div>
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-surface-white/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
       <!-- Overall Statistics Strip -->
       <div class="grid grid-cols-3 gap-2.5">
-        <div class="bg-surface-white p-3.5 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
-          <div class="w-8 h-8 rounded-xl bg-school-bg text-school-text flex items-center justify-center mb-1.5">
-            <span class="material-symbols-outlined text-base">school</span>
+        <div class="bg-surface-white p-3 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
+          <div class="w-7 h-7 rounded-lg bg-school-bg text-school-text flex items-center justify-center mb-1">
+            <span class="material-symbols-outlined text-sm">school</span>
           </div>
           <span class="text-[11px] text-text-secondary font-medium">학습지 중요</span>
           <span id="stat-total-school" class="text-base font-bold text-school-text">0</span>
         </div>
 
-        <div class="bg-surface-white p-3.5 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
-          <div class="w-8 h-8 rounded-xl bg-amber-50 text-warning flex items-center justify-center mb-1.5">
-            <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+        <div class="bg-surface-white p-3 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
+          <div class="w-7 h-7 rounded-lg bg-amber-50 text-warning flex items-center justify-center mb-1">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
           </div>
           <span class="text-[11px] text-text-secondary font-medium">내 별표 단어</span>
           <span id="stat-total-starred" class="text-base font-bold text-warning">0</span>
         </div>
 
-        <div class="bg-surface-white p-3.5 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
-          <div class="w-8 h-8 rounded-xl bg-error-container text-error flex items-center justify-center mb-1.5">
-            <span class="material-symbols-outlined text-base font-bold">check</span>
+        <div class="bg-surface-white p-3 rounded-2xl border border-surface-container flex flex-col items-center justify-center shadow-xs">
+          <div class="w-7 h-7 rounded-lg bg-error-container text-error flex items-center justify-center mb-1">
+            <span class="material-symbols-outlined text-sm font-bold">check</span>
           </div>
           <span class="text-[11px] text-text-secondary font-medium">복습 필요</span>
           <span id="stat-total-difficult" class="text-base font-bold text-error">0</span>
         </div>
       </div>
 
-      <!-- Daily Schedule Cards Grid -->
-      <div class="flex flex-col gap-2.5">
+      <!-- SECTION 1: 교과서 본문 어휘 (Day 1 ~ 9) - 3~4칸 콤팩트 그리드 -->
+      <div class="flex flex-col gap-2 pt-1">
         <div class="flex items-center justify-between px-1">
-          <h3 class="text-sm font-bold text-text-primary">일자별 학습 카드 (Day 1 ~ 9)</h3>
-          <span class="text-xs text-text-secondary">원하는 일자를 선택하세요</span>
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary border border-primary/20">교과서</span>
+            <h3 class="text-xs sm:text-sm font-bold text-text-primary tracking-wide">교과서 본문 어휘 (Day 1 ~ 9)</h3>
+          </div>
+          <span class="text-[11px] text-text-secondary">일자 터치하여 이동</span>
         </div>
+        <div id="home-textbook-grid" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
 
-        <div id="home-day-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <!-- SECTION 2: 모의고사 지문 어휘 (Day 10 ~ 15) - 3~4칸 콤팩트 그리드 -->
+      <div class="flex flex-col gap-2 pt-2">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-school-bg text-school-text border border-indigo-200">모의고사</span>
+            <h3 class="text-xs sm:text-sm font-bold text-text-primary tracking-wide">모의고사 지문 어휘 (Day 10 ~ 15)</h3>
+          </div>
+          <span class="text-[11px] text-text-secondary">지문 핵심 어휘</span>
+        </div>
+        <div id="home-mock-grid" class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 gap-2">
           <!-- Rendered via JS -->
         </div>
       </div>
@@ -201,14 +178,14 @@
     <!-- ========================================== -->
     <div id="view-word-list" class="hidden flex-col gap-4 mt-2">
       <!-- Day Hero Banner -->
-      <div class="flex items-center justify-between bg-primary-container p-5 rounded-2xl shadow-sm text-on-primary-container relative overflow-hidden">
+      <div class="flex items-center justify-between bg-primary-container p-4 sm:p-5 rounded-2xl shadow-sm text-on-primary-container relative overflow-hidden">
         <div class="flex flex-col gap-1 z-10">
-          <span class="text-xs font-semibold text-on-primary-container/70 tracking-wider">DAILY VOCABULARY</span>
-          <h2 id="banner-day-title" class="text-2xl font-bold">Day 1 Words</h2>
-          <p id="banner-word-count" class="text-sm text-on-primary-container/85">Master these words today.</p>
+          <span id="banner-day-tag" class="text-xs font-semibold text-on-primary-container/70 tracking-wider">DAILY VOCABULARY</span>
+          <h2 id="banner-day-title" class="text-xl sm:text-2xl font-bold">Day 1 Words</h2>
+          <p id="banner-word-count" class="text-xs sm:text-sm text-on-primary-container/85">Master these words today.</p>
         </div>
-        <div class="w-12 h-12 rounded-full bg-surface-white/20 flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-2xl text-on-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+        <div class="w-11 h-11 rounded-full bg-surface-white/20 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl text-on-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
         </div>
       </div>
 
@@ -229,51 +206,51 @@
       </div>
 
       <!-- Quick Flashcard Banner inside Word List -->
-      <div class="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex items-center justify-between">
+      <div class="bg-primary/10 border border-primary/20 rounded-2xl p-3.5 sm:p-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-xs">
-            <span class="material-symbols-outlined text-xl">style</span>
+          <div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-xs">
+            <span class="material-symbols-outlined text-lg">style</span>
           </div>
           <div>
-            <h4 class="text-sm font-bold text-text-primary">플래시카드 카드 넘기기</h4>
-            <p class="text-xs text-text-secondary">앞뒤로 뒤집으며 연관 표현과 암기 상태를 점검하세요</p>
+            <h4 class="text-xs sm:text-sm font-bold text-text-primary">플래시카드 넘기기</h4>
+            <p class="text-[11px] sm:text-xs text-text-secondary">카드를 뒤집으며 연관 표현과 암기 상태 점검</p>
           </div>
         </div>
-        <button id="btn-quick-flashcard" class="px-3.5 py-2 bg-primary text-on-primary text-xs font-bold rounded-xl shadow-xs active:scale-95 transition-transform shrink-0">
+        <button id="btn-quick-flashcard" class="px-3 py-1.5 bg-primary text-on-primary text-xs font-bold rounded-xl shadow-xs active:scale-95 transition-transform shrink-0">
           시작
         </button>
       </div>
 
       <!-- Word Cards List -->
-      <div id="word-cards-container" class="flex flex-col gap-3">
+      <div id="word-cards-container" class="flex flex-col gap-2.5">
         <!-- Rendered via JS -->
       </div>
 
       <!-- Test Hub Action Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-        <div class="p-5 bg-surface-white rounded-2xl border border-surface-container flex flex-col justify-between shadow-xs">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+        <div class="p-4 sm:p-5 bg-surface-white rounded-2xl border border-surface-container flex flex-col justify-between shadow-xs">
           <div>
-            <div class="w-10 h-10 mb-2 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-              <span class="material-symbols-outlined text-2xl">checklist</span>
+            <div class="w-9 h-9 mb-2 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-xl">checklist</span>
             </div>
-            <h3 class="text-base font-bold text-text-primary">객관식 테스트 (W &rarr; M)</h3>
-            <p class="text-xs text-text-secondary mt-1">영단어를 보고 알맞은 한글 뜻 4지선다 고르기</p>
+            <h3 class="text-sm sm:text-base font-bold text-text-primary">객관식 테스트 (W &rarr; M)</h3>
+            <p class="text-xs text-text-secondary mt-0.5">영단어를 보고 알맞은 한글 뜻 4지선다 고르기</p>
           </div>
-          <button id="btn-start-choice-test" class="mt-4 w-full h-11 bg-primary text-on-primary rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform">
+          <button id="btn-start-choice-test" class="mt-3.5 w-full h-10 sm:h-11 bg-primary text-on-primary rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform">
             <span class="material-symbols-outlined text-base">play_arrow</span>
             객관식 시험 시작
           </button>
         </div>
 
-        <div class="p-5 bg-surface-white rounded-2xl border border-surface-container flex flex-col justify-between shadow-xs">
+        <div class="p-4 sm:p-5 bg-surface-white rounded-2xl border border-surface-container flex flex-col justify-between shadow-xs">
           <div>
-            <div class="w-10 h-10 mb-2 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
-              <span class="material-symbols-outlined text-2xl">edit_note</span>
+            <div class="w-9 h-9 mb-2 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
+              <span class="material-symbols-outlined text-xl">edit_note</span>
             </div>
-            <h3 class="text-base font-bold text-text-primary">주관식 영작 (M &rarr; W)</h3>
-            <p class="text-xs text-text-secondary mt-1">한글 뜻을 보고 정확한 영단어를 직접 타이핑</p>
+            <h3 class="text-sm sm:text-base font-bold text-text-primary">주관식 영작 (M &rarr; W)</h3>
+            <p class="text-xs text-text-secondary mt-0.5">한글 뜻을 보고 정확한 영단어를 직접 타이핑</p>
           </div>
-          <button id="btn-start-typing-test" class="mt-4 w-full h-11 bg-surface-container-high hover:bg-surface-container text-text-primary rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-transform">
+          <button id="btn-start-typing-test" class="mt-3.5 w-full h-10 sm:h-11 bg-surface-container-high hover:bg-surface-container text-text-primary rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 active:scale-98 transition-transform">
             <span class="material-symbols-outlined text-base">keyboard</span>
             주관식 시험 시작
           </button>
@@ -296,8 +273,8 @@
         <div id="quiz-progress-bar" class="bg-primary h-full transition-all duration-300" style="width: 20%"></div>
       </div>
 
-      <div id="flashcard" class="w-full min-h-[320px] cursor-pointer perspective-1000 my-3">
-        <div id="flashcard-inner" class="relative w-full h-full min-h-[320px] duration-500 transform-style-3d transition-transform rounded-2xl shadow-lg border border-surface-container bg-surface-white">
+      <div id="flashcard" class="w-full min-h-[300px] cursor-pointer perspective-1000 my-2">
+        <div id="flashcard-inner" class="relative w-full h-full min-h-[300px] duration-500 transform-style-3d transition-transform rounded-2xl shadow-md border border-surface-container bg-surface-white">
           
           <!-- Front of Flashcard -->
           <div class="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center text-center backface-hidden bg-surface-white rounded-2xl">
@@ -324,14 +301,14 @@
           <!-- Back of Flashcard -->
           <div class="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center text-center backface-hidden rotate-y-180 bg-surface-container-low rounded-2xl overflow-y-auto no-scrollbar">
             <div class="w-full flex justify-end">
-              <span class="text-xs font-semibold text-primary">의미 및 연관 숙어</span>
+              <span class="text-xs font-semibold text-primary">의미 및 연관 표현</span>
             </div>
             <div class="my-auto w-full flex flex-col items-center gap-2.5">
               <h3 id="fc-meaning" class="text-2xl sm:text-3xl font-bold text-text-primary">성취하다, 완수하다</h3>
               <p id="fc-word-sub" class="text-sm font-semibold text-text-secondary">Accomplish</p>
               
               <!-- Collocation / Usage Info Box -->
-              <div id="fc-colloc-box" class="hidden w-full max-w-[90%] bg-surface-white p-3 rounded-xl border border-indigo-100 text-left shadow-xs mt-1">
+              <div id="fc-colloc-box" class="hidden w-full max-w-[92%] bg-surface-white p-3 rounded-xl border border-indigo-100 text-left shadow-xs mt-1">
                 <div class="flex items-center gap-1 text-primary text-[11px] font-bold mb-1">
                   <span class="material-symbols-outlined text-[14px]">auto_stories</span> 필수 연관 표현
                 </div>
@@ -346,11 +323,11 @@
       </div>
 
       <div class="grid grid-cols-2 gap-3">
-        <button id="btn-quiz-wrong" class="h-14 bg-error-container text-on-error-container font-bold rounded-xl flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-sm">
+        <button id="btn-quiz-wrong" class="h-13 bg-error-container text-on-error-container font-bold rounded-xl flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-sm">
           <span class="material-symbols-outlined text-lg font-bold">close</span>
           몰라요 (복습)
         </button>
-        <button id="btn-quiz-correct" class="h-14 bg-primary text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-md">
+        <button id="btn-quiz-correct" class="h-13 bg-primary text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 active:scale-98 transition-transform shadow-md">
           <span class="material-symbols-outlined text-lg font-bold">check</span>
           알아요!
         </button>
@@ -378,8 +355,7 @@
         <div id="choice-progress-bar" class="bg-primary h-full transition-all duration-300" style="width: 10%"></div>
       </div>
 
-      <!-- Word Question Card -->
-      <div class="bg-surface-white rounded-2xl p-6 sm:p-8 flex flex-col items-center justify-center shadow-sm border border-surface-container relative min-h-[160px]">
+      <div class="bg-surface-white rounded-2xl p-6 flex flex-col items-center justify-center shadow-sm border border-surface-container relative min-h-[160px]">
         <button id="choice-btn-tts" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container">
           <span class="material-symbols-outlined text-lg">volume_up</span>
         </button>
@@ -391,12 +367,11 @@
         <p id="choice-card-feedback-hint" class="text-xs font-semibold text-text-secondary mt-2 opacity-0 transition-opacity text-center"></p>
       </div>
 
-      <!-- Options Grid (4 options) -->
       <div id="choice-options-container" class="flex flex-col gap-2.5">
         <!-- Rendered by JS -->
       </div>
 
-      <button id="choice-btn-next" class="w-full h-14 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md hidden items-center justify-center gap-2 active:scale-98 transition-all">
+      <button id="choice-btn-next" class="w-full h-13 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md hidden items-center justify-center gap-2 active:scale-98 transition-all">
         다음 단어로
         <span class="material-symbols-outlined text-lg">arrow_forward</span>
       </button>
@@ -423,9 +398,7 @@
         <div id="typing-progress-bar" class="bg-primary h-full transition-all duration-300" style="width: 10%"></div>
       </div>
 
-      <!-- Meaning Question Card -->
-      <div class="relative bg-surface-white rounded-2xl shadow-sm border border-surface-container p-6 sm:p-8 flex flex-col items-center justify-center min-h-[180px]">
-        <!-- Hint Button & Tooltip -->
+      <div class="relative bg-surface-white rounded-2xl shadow-sm border border-surface-container p-6 flex flex-col items-center justify-center min-h-[170px]">
         <button id="typing-btn-hint" class="absolute top-4 right-4 w-9 h-9 bg-surface-container text-on-surface-variant hover:bg-surface-container-high rounded-full flex items-center justify-center transition-all active:scale-95 shadow-xs" title="단어 힌트 보기">
           <span class="material-symbols-outlined text-lg">lightbulb</span>
         </button>
@@ -441,7 +414,6 @@
         <p id="typing-feedback-desc" class="text-xs text-text-secondary text-center mt-1">정확한 영어 스펠링을 입력하세요</p>
       </div>
 
-      <!-- Input Area -->
       <div id="typing-input-container" class="w-full bg-surface-container rounded-xl p-1.5 shadow-inner transition-colors duration-200">
         <div class="bg-surface-white rounded-lg p-3.5 flex items-center shadow-xs">
           <input autocomplete="off" autocorrect="off" class="w-full bg-transparent outline-none text-center text-text-primary text-base sm:text-lg font-bold placeholder:text-outline/40 placeholder:font-normal caret-primary" id="typing-input" placeholder="스펠링을 입력하세요..." spellcheck="false" type="text"/>
@@ -451,7 +423,7 @@
         </div>
       </div>
 
-      <button id="typing-btn-action" class="w-full h-14 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-98 transition-all">
+      <button id="typing-btn-action" class="w-full h-13 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-98 transition-all">
         정답 확인
       </button>
     </div>
@@ -459,9 +431,9 @@
     <!-- ========================================== -->
     <!-- VIEW 5: TEST RESULT (시험 및 퀴즈 결과) -->
     <!-- ========================================== -->
-    <div id="view-quiz-result" class="hidden flex-col items-center gap-5 mt-6 text-center">
-      <div id="result-icon-wrapper" class="w-20 h-20 rounded-full bg-success/15 flex items-center justify-center text-success">
-        <span class="material-symbols-outlined text-5xl">task_alt</span>
+    <div id="view-quiz-result" class="hidden flex-col items-center gap-5 mt-5 text-center">
+      <div id="result-icon-wrapper" class="w-18 h-18 rounded-full bg-success/15 flex items-center justify-center text-success">
+        <span class="material-symbols-outlined text-4xl">task_alt</span>
       </div>
       <div>
         <h2 id="result-main-title" class="text-2xl font-bold text-text-primary">학습 완료!</h2>
@@ -485,42 +457,42 @@
       </div>
 
       <div class="w-full flex flex-col gap-2 mt-2">
-        <button id="btn-retest-wrong-only" class="w-full h-12 bg-error text-surface-white font-bold rounded-xl active:scale-98 shadow-md transition-transform flex items-center justify-center gap-2 hidden">
+        <button id="btn-retest-wrong-only" class="w-full h-11 bg-error text-surface-white font-bold rounded-xl active:scale-98 shadow-md transition-transform flex items-center justify-center gap-2 hidden">
           <span class="material-symbols-outlined text-lg">replay</span>
           틀린 단어만 바로 재시험 (<span id="res-wrong-btn-count">0</span>개)
         </button>
-        <button id="btn-retry-test" class="w-full h-12 bg-primary text-on-primary font-semibold rounded-xl active:scale-98 shadow-md transition-transform">
+        <button id="btn-retry-test" class="w-full h-11 bg-primary text-on-primary font-semibold rounded-xl active:scale-98 shadow-md transition-transform">
           전체 단어 다시 테스트
         </button>
-        <button id="btn-back-to-list" class="w-full h-12 bg-surface-white text-text-primary border border-surface-container font-semibold rounded-xl active:scale-98 transition-transform">
+        <button id="btn-back-to-list" class="w-full h-11 bg-surface-white text-text-primary border border-surface-container font-semibold rounded-xl active:scale-98 transition-transform">
           단어 목록으로 돌아가기
         </button>
       </div>
     </div>
   </main>
 
-  <!-- Bottom Navigation Bar -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-surface-white/95 backdrop-blur-xl border-t border-surface-container pb-safe">
-    <div class="flex justify-around items-center h-16 max-w-[600px] mx-auto px-2">
-      <button id="nav-btn-home" class="flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold transition-colors">
+  <!-- Bottom Navigation Bar (Hidden by default on Home View) -->
+  <nav id="bottom-navigation" class="fixed bottom-0 inset-x-0 z-40 bg-surface-white/95 backdrop-blur-xl border-t border-surface-container pb-safe hidden">
+    <div class="flex justify-around items-center h-15 max-w-[640px] mx-auto px-2">
+      <button id="nav-btn-home" class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-primary transition-colors">
         <span class="material-symbols-outlined text-2xl">home</span>
-        <span class="text-[11px]">홈</span>
+        <span class="text-[10px]">홈</span>
       </button>
-      <button id="nav-btn-list" class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-primary transition-colors">
+      <button id="nav-btn-list" class="flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold transition-colors">
         <span class="material-symbols-outlined text-2xl">list_alt</span>
-        <span class="text-[11px]">단어장</span>
+        <span class="text-[10px]">단어장</span>
       </button>
       <button id="nav-btn-quiz" class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-primary transition-colors">
         <span class="material-symbols-outlined text-2xl">style</span>
-        <span class="text-[11px]">플래시카드</span>
+        <span class="text-[10px]">플래시카드</span>
       </button>
       <button id="nav-btn-tests" class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-primary transition-colors">
         <span class="material-symbols-outlined text-2xl">quiz</span>
-        <span class="text-[11px]">테스트</span>
+        <span class="text-[10px]">테스트</span>
       </button>
       <button id="nav-btn-reset" class="flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-error transition-colors">
         <span class="material-symbols-outlined text-2xl">restart_alt</span>
-        <span class="text-[11px]">초기화</span>
+        <span class="text-[10px]">초기화</span>
       </button>
     </div>
   </nav>
@@ -557,34 +529,23 @@
       </div>
 
       <div class="flex flex-col gap-2.5">
-        <button id="modal-start-flashcard" class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center gap-4 text-left transition-all active:scale-98">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-2xl">style</span>
-          </div>
-          <div class="flex-1">
-            <h4 class="text-sm font-bold text-text-primary">플래시카드 암기</h4>
-            <p class="text-xs text-text-secondary mt-0.5">앞뒤로 카드를 뒤집으며 '알아요/몰라요' 자가 진단</p>
-          </div>
-          <span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
-        </button>
-
-        <button id="modal-start-choice" class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center gap-4 text-left transition-all active:scale-98">
-          <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-primary flex items-center justify-center shrink-0">
+        <button id="modal-start-choice" class="p-3.5 sm:p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center gap-3.5 text-left transition-all active:scale-98">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-primary flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-2xl">checklist</span>
           </div>
           <div class="flex-1">
-            <h4 class="text-sm font-bold text-text-primary">객관식 4지선다 시험 (W &rarr; M)</h4>
+            <h4 class="text-sm font-bold text-text-primary">객관식 4지선다 시험 (영 &rarr; 한)</h4>
             <p class="text-xs text-text-secondary mt-0.5">영단어를 보고 알맞은 한글 뜻 4개 중 선택</p>
           </div>
           <span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
         </button>
 
-        <button id="modal-start-typing" class="p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center gap-4 text-left transition-all active:scale-98">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+        <button id="modal-start-typing" class="p-3.5 sm:p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-surface-container flex items-center gap-3.5 text-left transition-all active:scale-98">
+          <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
             <span class="material-symbols-outlined text-2xl">edit_note</span>
           </div>
           <div class="flex-1">
-            <h4 class="text-sm font-bold text-text-primary">주관식 영작 시험 (M &rarr; W)</h4>
+            <h4 class="text-sm font-bold text-text-primary">주관식 영작 시험 (한 &rarr; 영)</h4>
             <p class="text-xs text-text-secondary mt-0.5">한글 뜻을 보고 영어 스펠링을 직접 타이핑</p>
           </div>
           <span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
@@ -614,11 +575,7 @@
   </div>
 
   <script>
-    // ==========================================
-    // VOCABULARY DATABASE (Day 1 ~ Day 9)
-    // WITH ESSENTIAL COLLOCATIONS & IDIOM PATTERNS
-    // ==========================================
-    const TOTAL_DAYS = 9;
+    const TOTAL_DAYS = 15;
     const VOCAB_DATABASE = {
       1: [
         { word: 'look forward to ~', pos: 'phr.', meaning: '~을 기대하다', point: false, colloc: 'look forward to + -ing / N (~을 고대하다)' },
@@ -869,10 +826,308 @@
         { word: 'presence', pos: '명', meaning: '존재, 있음', point: true, colloc: 'strong presence (강렬한 존재감)' },
         { word: 'figure', pos: '명', meaning: '인물, 모습', point: true, colloc: 'historical / key figure (역사적/핵심 인물)' },
         { word: 'on the other hand', pos: 'phr.', meaning: '반면에', point: true, colloc: 'On the other hand, however (반면에, 그렇지만)' }
+      ],
+      10: [
+        { word: 'atom', pos: '', meaning: '원자', point: true, colloc: 'atomic structure (원자 구조)' },
+        { word: 'nearly', pos: '', meaning: '거의', point: false, colloc: 'nearly impossible (거의 불가능한)' },
+        { word: 'old', pos: '', meaning: '오래된', point: false, colloc: 'as old as the universe (우주만큼 오래된)' },
+        { word: 'universe', pos: '', meaning: '우주', point: false, colloc: 'origin of the universe (우주의 기원)' },
+        { word: 'breathe', pos: '', meaning: '숨을 쉬다', point: false, colloc: 'breathe in and out (숨을 들이쉬고 내쉬다)' },
+        { word: 'inhale', pos: '', meaning: '들이마시다', point: true, colloc: 'inhale deeply (깊게 들이마시다)' },
+        { word: 'exhale', pos: '', meaning: '내쉬다', point: true, colloc: 'exhale air (숨을 내쉬다)' },
+        { word: 'breath', pos: '', meaning: '숨', point: false, colloc: 'take a deep breath (심호흡을 하다)' },
+        { word: 'remaining', pos: '', meaning: '남아있는', point: false, colloc: 'the remaining atoms (남아있는 원자들)' },
+        { word: 'take A into B', pos: 'phr.', meaning: 'A를 B로 데려가다', point: false, colloc: 'take air into our lungs (공기를 폐 속으로 들이마시다)' },
+        { word: 'leave', pos: '', meaning: '떠나다', point: false, colloc: 'leave the body (몸을 빠져나가다)' },
+        { word: 'means', pos: '', meaning: '방법, 수단', point: true, colloc: 'a means of communication (소통의 수단)' },
+        { word: 'own', pos: '', meaning: '소유하다', point: false, colloc: 'we do not own atoms (우리는 원자를 소유하지 않는다)' },
+        { word: 'make ~ up', pos: 'phr.', meaning: '~을 구성하다', point: false, colloc: 'make up everything (모든 것을 구성하다)' },
+        { word: 'borrow', pos: '', meaning: '빌리다', point: false, colloc: 'borrow from the Earth (지구로부터 빌리다)' },
+        { word: 'share', pos: '', meaning: '공유하다', point: false, colloc: 'share with other creatures (다른 생명체와 공유하다)' },
+        { word: 'pool', pos: '', meaning: '풀, 수영장; 공용 저장고', point: true, colloc: 'a shared pool of atoms (공유되는 원자의 풀)' },
+        { word: 'forever', pos: '', meaning: '영원히', point: false, colloc: 'last forever (영원히 지속되다)' },
+        { word: 'cycle', pos: '', meaning: '순환하다', point: false, colloc: 'cycle through nature (자연 속을 순환하다)' },
+        { word: 'sweat', pos: '', meaning: '땀', point: false, colloc: 'sweat drops (땀방울)' },
+        { word: 'evaporate', pos: '', meaning: '증발하다, 사라지다', point: true, colloc: 'evaporate into the air (공기 중으로 증발하다)' },
+        { word: 'recycle', pos: '', meaning: '재순환시키다; 재순환하다', point: false, colloc: 'recycle matter (물질을 재순환하다)' },
+        { word: 'grand', pos: '', meaning: '엄청난, 웅장한', point: true, colloc: 'a grand scale (웅장한 규모)' },
+        { word: 'scale', pos: '', meaning: '규모, 등급, 저울', point: true, colloc: 'on a global scale (세계적인 규모로)' },
+        { word: 'origin', pos: '', meaning: '기원', point: false, colloc: 'the origin of life (생명의 기원)' },
+        { word: 'go back to ~', pos: 'phr.', meaning: '~로 거슬러 올라가다', point: false, colloc: 'go back to the beginning of time (시간의 시작으로 거슬러 올라가다)' },
+        { word: 'exist', pos: '', meaning: '존재하다', point: false, colloc: 'exist in many forms (여러 형태로 존재하다)' },
+        { word: 'throughout', pos: '', meaning: '~ 전체에 걸쳐서', point: false, colloc: 'throughout history (역사 전체에 걸쳐)' },
+        { word: 'limitless', pos: '', meaning: '제한이 없는; 방대한', point: true, colloc: 'limitless possibilities (무한한 가능성)' },
+        { word: 'form', pos: '', meaning: '형태', point: false, colloc: 'take a new form (새로운 형태를 띠다)' },
+        { word: 'nonliving', pos: '', meaning: '비생물인', point: false, colloc: 'nonliving matter (무생물 물질)' },
+        { word: 'living', pos: '', meaning: '살아있는', point: false, colloc: 'living organisms (살아있는 유기체)' },
+        { word: 'present', pos: '', meaning: '현재의; 현재; 존재하다', point: true, colloc: 'be present in all things (모든 것에 존재하다)' },
+        { word: 'caretaker', pos: '', meaning: '관리인', point: true, colloc: 'temporary caretaker (임시 관리인)' },
+        { word: 'follow', pos: '', meaning: '뒤따르다', point: false, colloc: 'follow a path (경로를 뒤따르다)' }
+      ],
+      11: [
+        { word: 'gardening', pos: '', meaning: '원예, 정원 가꾸기', point: true, colloc: 'enjoy gardening (원예를 즐기다)' },
+        { word: 'physical', pos: '', meaning: '신체의', point: false, colloc: 'physical health / exercise (신체 건강/운동)' },
+        { word: 'activity', pos: '', meaning: '활동', point: false, colloc: 'outdoor activity (야외 활동)' },
+        { word: 'involve', pos: '', meaning: '포함하다', point: false, colloc: 'involve various tasks (다양한 작업을 포함하다)' },
+        { word: 'a range of', pos: 'phr.', meaning: '다양한', point: true, colloc: 'a wide range of motions (아주 다양한 움직임)' },
+        { word: 'motion', pos: '', meaning: '움직임', point: true, colloc: 'repetitive motion (반복적인 동작)' },
+        { word: 'dig', pos: '', meaning: '파다, 캐다', point: true, colloc: 'dig the soil (흙을 파다)' },
+        { word: 'digging', pos: '', meaning: '(땅) 파기', point: false, colloc: 'digging and planting (땅 파기와 심기)' },
+        { word: 'planting', pos: '', meaning: '심기', point: false, colloc: 'planting seeds (씨앗 심기)' },
+        { word: 'watering', pos: '', meaning: '물 주기', point: false, colloc: 'watering plants (식물에 물 주기)' },
+        { word: 'harvest', pos: '', meaning: '수확하다, 수확, 추수', point: true, colloc: 'harvest crops (농작물을 수확하다)' },
+        { word: 'harvesting', pos: '', meaning: '수확하기', point: false, colloc: 'harvesting season (수확철)' },
+        { word: 'improve', pos: '', meaning: '향상시키다', point: false, colloc: 'improve muscle strength (근력을 향상시키다)' },
+        { word: 'strength', pos: '', meaning: '힘, 강인함', point: false, colloc: 'build up strength (체력을 기르다)' },
+        { word: 'flexibility', pos: '', meaning: '유연성', point: true, colloc: 'joint flexibility (관절 유연성)' },
+        { word: 'endurance', pos: '', meaning: '내구성, 지구력', point: true, colloc: 'cardiovascular endurance (심폐 지구력)' },
+        { word: 'realize', pos: '', meaning: '깨닫다, 인식하다', point: false, colloc: 'without realizing it (자신도 모르게/깨닫지 못한 채)' },
+        { word: 'task', pos: '', meaning: '과업', point: false, colloc: 'daily gardening tasks (매일의 정원 일)' },
+        { word: 'weed', pos: '', meaning: '잡초를 뽑다; 잡초', point: true, colloc: 'weed the garden (정원의 잡초를 뽑다)' },
+        { word: 'burn', pos: '', meaning: '태우다', point: false, colloc: 'burn calories (칼로리를 소모하다)' },
+        { word: 'particularly', pos: '', meaning: '특히', point: false, colloc: 'particularly helpful (특히 도움이 되는)' },
+        { word: 'beneficial', pos: '', meaning: '유익한', point: false, colloc: 'beneficial to health (건강에 유익한)' },
+        { word: 'traditional', pos: '', meaning: '전통적인', point: false, colloc: 'traditional gym workouts (전통적인 헬스 운동)' },
+        { word: 'exercise', pos: '', meaning: '운동', point: false, colloc: 'regular exercise (규칙적인 운동)' },
+        { word: 'challenging', pos: '', meaning: '힘든', point: false, colloc: 'find it challenging (힘들다고 느끼다)' },
+        { word: 'low-impact', pos: '', meaning: '부담을 주지 않는, 영향이 적은', point: true, colloc: 'low-impact exercise (관절에 부담이 적은 저강도 운동)' },
+        { word: 'active', pos: '', meaning: '활동적인', point: false, colloc: 'stay physically active (신체적으로 활동적인 상태를 유지하다)' },
+        { word: 'fit', pos: '', meaning: '건강한', point: false, colloc: 'keep fit (건강을 유지하다)' },
+        { word: 'accessible', pos: '', meaning: '접근 가능한', point: false, colloc: 'easily accessible (쉽게 접근할 수 있는)' },
+        { word: 'ability', pos: '', meaning: '능력', point: false, colloc: 'of all abilities (모든 신체 능력 수준의)' },
+        { word: 'besides', pos: '', meaning: '~ 외에도', point: false, colloc: 'besides physical benefits (신체적 이점 외에도)' },
+        { word: 'profound', pos: '', meaning: '엄청난, 심오한', point: true, colloc: 'profound mental effect (지대한 정신적 효과)' },
+        { word: 'mental', pos: '', meaning: '정신적인', point: false, colloc: 'mental clarity (정신적 명료함)' },
+        { word: 'benefit', pos: '', meaning: '이점', point: false, colloc: 'health benefits (건강상 이점)' },
+        { word: 'tend', pos: '', meaning: '돌보다, 보살피다', point: true, colloc: 'tend living plants (살아있는 식물을 돌보다)' },
+        { word: 'tend to ~', pos: 'phr.', meaning: '~ 하는 경향이 있다', point: true, colloc: 'tend to reduce stress (스트레스를 줄이는 경향이 있다)' },
+        { word: 'incredibly', pos: '', meaning: '믿을 수 없을 정도로', point: false, colloc: 'incredibly calming (믿기지 않을 만큼 마음을 편안하게 해주는)' },
+        { word: 'calm', pos: '', meaning: '진정시키다', point: false, colloc: 'calm the nervous system (신경계를 진정시키다)' },
+        { word: 'meditative', pos: '', meaning: '명상적인, 깊은 생각에 잠긴', point: true, colloc: 'a meditative state (명상적인 상태)' },
+        { word: 'focus on ~', pos: 'phr.', meaning: '~에 집중하다', point: false, colloc: 'focus on the present (현재에 온전히 집중하다)' },
+        { word: 'present', pos: '', meaning: '현재의', point: false, colloc: 'the present moment (현재 순간)' },
+        { word: 'reduce', pos: '', meaning: '줄이다', point: false, colloc: 'reduce mental stress (정신적 스트레스를 줄이다)' },
+        { word: 'anxiety', pos: '', meaning: '불안감', point: false, colloc: 'relieve anxiety (불안을 덜어내다)' },
+        { word: 'repetitive', pos: '', meaning: '반복적인', point: false, colloc: 'repetitive actions (반복되는 손동작)' },
+        { word: 'involved in ~', pos: 'phr.', meaning: '~에 관련된', point: false, colloc: 'be involved in gardening (원예 활동에 참여하다)' },
+        { word: 'induce', pos: '', meaning: '유도하다, 유발하다', point: true, colloc: 'induce relaxation (휴식을 유도하다)' },
+        { word: 'state', pos: '', meaning: '상태', point: false, colloc: 'a relaxed mental state (편안한 정신 상태)' },
+        { word: 'mindfulness', pos: '', meaning: '마음 챙김', point: false, colloc: 'practice mindfulness (마음챙김을 실천하다)' },
+        { word: 'similar to ~', pos: 'phr.', meaning: '~와 유사한', point: false, colloc: 'similar to yoga (요가와 유사한)' },
+        { word: 'meditation', pos: '', meaning: '명상', point: true, colloc: 'deep meditation (깊은 명상)' },
+        { word: 'study', pos: '', meaning: '연구, 조사', point: false, colloc: 'recent scientific studies (최근 과학 연구들)' },
+        { word: 'elevate', pos: '', meaning: '기분을 북돋우다, 높이다', point: true, colloc: 'elevate one’s mood (기분을 북돋우다)' },
+        { word: 'mood', pos: '', meaning: '기분', point: false, colloc: 'positive mood (긍정적인 기분)' },
+        { word: 'cognition', pos: '', meaning: '인지', point: false, colloc: 'improve cognition (인지 기능을 개선하다)' },
+        { word: 'depression', pos: '', meaning: '우울, 불경기', point: true, colloc: 'fight depression (우울감을 이겨내다)' },
+        { word: 'symptom', pos: '', meaning: '증상, 징후', point: true, colloc: 'reduce depressive symptoms (우울 증상을 완화하다)' },
+        { word: 'accomplishment', pos: '', meaning: '성취', point: false, colloc: 'a sense of accomplishment (성취감)' },
+        { word: 'thrive', pos: '', meaning: '번창하다, 잘 자라다', point: true, colloc: 'watch plants thrive (식물이 싱싱하게 자라는 것을 보다)' },
+        { word: 'boost', pos: '', meaning: '높이다', point: false, colloc: 'boost self-esteem (자존감을 북돋우다)' },
+        { word: 'self-esteem', pos: '', meaning: '자아존중감', point: false, colloc: 'healthy self-esteem (건강한 자존감)' },
+        { word: 'overall', pos: '', meaning: '전반적인', point: false, colloc: 'overall quality of life (전반적인 삶의 질)' },
+        { word: 'well-being', pos: '', meaning: '행복, 웰빙', point: false, colloc: 'enhance psychological well-being (심리적 안녕감을 증진하다)' }
+      ],
+      12: [
+        { word: 'century', pos: '', meaning: '세기', point: false, colloc: 'for centuries (수 세기 동안)' },
+        { word: 'take advantage of ~', pos: 'phr.', meaning: '~을 이용하다', point: true, colloc: 'take advantage of technology (기술을 잘 활용하다)' },
+        { word: 'tool', pos: '', meaning: '도구', point: false, colloc: 'scientific tools (과학 도구들)' },
+        { word: 'translate', pos: '', meaning: '바꾸다, 번역하다', point: false, colloc: 'translate signals into images (신호를 영상으로 변환하다)' },
+        { word: 'bring A into B', pos: 'phr.', meaning: 'A를 B로 가져오다', point: false, colloc: 'bring data into human view (데이터를 인간의 시야로 가져오다)' },
+        { word: 'perception', pos: '', meaning: '지각, 인식', point: true, colloc: 'human perception (인간의 지각 능력)' },
+        { word: 'natural', pos: '', meaning: '자연의', point: false, colloc: 'natural phenomena (자연 현상)' },
+        { word: 'phenomena', pos: '', meaning: '현상 (phenomenon의 복수형)', point: false, colloc: 'observe strange phenomena (기이한 현상들을 관찰하다)' },
+        { word: 'perceive', pos: '', meaning: '지각하다, 인지하다', point: false, colloc: 'perceive through senses (감각을 통해 지각하다)' },
+        { word: 'sense', pos: '', meaning: '감각', point: false, colloc: 'the five senses (오감)' },
+        { word: 'case', pos: '', meaning: '경우', point: false, colloc: 'in many cases (많은 경우에)' },
+        { word: 'consist of ~', pos: 'phr.', meaning: '~로 구성되다', point: true, colloc: 'consist of simple parts (단순한 부품들로 이루어지다)' },
+        { word: 'simply', pos: '', meaning: '단지, 단순히', point: false, colloc: 'simply amplify (단순히 증폭시키다)' },
+        { word: 'amplify', pos: '', meaning: '증폭시키다, 확장하다', point: true, colloc: 'amplify weak signals (미약한 신호를 증폭하다)' },
+        { word: 'signal', pos: '', meaning: '신호', point: false, colloc: 'auditory / visual signal (청각/시각 신호)' },
+        { word: 'feed into ~', pos: 'phr.', meaning: '~에 넣다, ~로 들어가다', point: false, colloc: 'feed directly into the brain (뇌로 직접 입력되다)' },
+        { word: 'normal', pos: '', meaning: '일반적인, 정상적인', point: false, colloc: 'normal human hearing (일반적인 사람의 청력)' },
+        { word: 'sensory', pos: '', meaning: '감각의', point: true, colloc: 'sensory organs / inputs (감각 기관/입력값)' },
+        { word: 'input', pos: '', meaning: '입력, 투입', point: true, colloc: 'receive sensory input (감각 입력을 받다)' },
+        { word: 'telescope', pos: '', meaning: '망원경', point: false, colloc: 'look through a telescope (망원경으로 들여다보다)' },
+        { word: 'clear', pos: '', meaning: '명확한', point: false, colloc: 'a clear view (선명한 시야)' },
+        { word: 'view', pos: '', meaning: '시야', point: false, colloc: 'block the view (시야를 가리다)' },
+        { word: 'far away', pos: 'phr.', meaning: '멀리 떨어진', point: false, colloc: 'stars located far away (멀리 떨어진 항성들)' },
+        { word: 'on one\'s own', pos: 'phr.', meaning: '스스로, 혼자 힘으로', point: false, colloc: 'see invisible light on one’s own (스스로는 보지 못하다)' },
+        { word: 'instrument', pos: '', meaning: '악기, 기구', point: true, colloc: 'optical instrument (광학 기구)' },
+        { word: 'turn A into B', pos: 'phr.', meaning: 'A를 B로 바꾸다', point: false, colloc: 'turn sound into light (소리를 빛으로 전환하다)' },
+        { word: 'observe', pos: '', meaning: '관찰하다, 주시하다', point: true, colloc: 'observe celestial bodies (천체를 관찰하다)' },
+        { word: 'expand', pos: '', meaning: '확장하다, 확대하다', point: true, colloc: 'expand our senses (우리의 감각 지평을 넓히다)' },
+        { word: 'reach', pos: '', meaning: '범위, 거리', point: true, colloc: 'beyond the reach of the naked eye (맨눈이 닿는 범위 너머)' },
+        { word: 'current', pos: '', meaning: '현재의, 지금의', point: false, colloc: 'current technology (현재의 기술 수준)' },
+        { word: 'visible', pos: '', meaning: '가시적인, 보이는', point: true, colloc: 'visible spectrum (가시광선 스펙트럼)' },
+        { word: 'based on ~', pos: 'phr.', meaning: '~에 기반한', point: false, colloc: 'based on scientific data (과학적 데이터에 기초한)' },
+        { word: 'ultraviolet', pos: '', meaning: '자외선의', point: true, colloc: 'ultraviolet radiation (자외선 방사)' },
+        { word: 'spectrum', pos: '', meaning: '스펙트럼', point: false, colloc: 'electromagnetic spectrum (전자기 스펙트럼)' },
+        { word: 'outside', pos: '', meaning: '~의 밖에', point: false, colloc: 'outside the visible range (가시 범위 바깥에 있는)' },
+        { word: 'range', pos: '', meaning: '범위, 폭', point: true, colloc: 'frequency range (주파수 범위)' },
+        { word: 'audible', pos: '', meaning: '들을 수 있는', point: true, colloc: 'audible sound waves (가청 음파)' },
+        { word: 'alternatively', pos: '', meaning: '그 대신에, 그렇지 않으면', point: true, colloc: 'Alternatively, we can measure ~ (그 대신에 우리는 ~를 측정할 수 있다)' },
+        { word: 'measure', pos: '', meaning: '측정하다', point: false, colloc: 'measure wavelengths (파장을 측정하다)' },
+        { word: 'property', pos: '', meaning: '재산, 속성', point: true, colloc: 'physical properties (물리적 성질/속성)' },
+        { word: 'capacity', pos: '', meaning: '능력, 용량', point: true, colloc: 'mental capacity (정신적 용량/능력)' },
+        { word: 'change A into B', pos: 'phr.', meaning: 'A를 B로 바꾸다', point: false, colloc: 'change data into sound (데이터를 소리로 변환하다)' },
+        { word: 'inspire', pos: '', meaning: '영감을 주다', point: true, colloc: 'inspire curiosity (호기심을 불러일으키다)' },
+        { word: 'auditory', pos: '', meaning: '청각의', point: true, colloc: 'auditory perception (청각 지각)' },
+        { word: 'imagination', pos: '', meaning: '상상, 상상력', point: true, colloc: 'spark scientific imagination (과학적 상상력을 자극하다)' }
+      ],
+      13: [
+        { word: 'opponent', pos: '', meaning: '반대자, 적수, 상대', point: true, colloc: 'opponents of testing (실험 반대론자들)' },
+        { word: 'experimentation', pos: '', meaning: '실험', point: true, colloc: 'animal experimentation (동물 대상 실험)' },
+        { word: 'argue', pos: '', meaning: '주장하다', point: false, colloc: 'argue that ~ (~라고 강하게 주장하다)' },
+        { word: 'modern', pos: '', meaning: '현대의', point: false, colloc: 'modern medicine (현대 의학)' },
+        { word: 'medicine', pos: '', meaning: '의학, 약', point: false, colloc: 'practice of medicine (의료 행위)' },
+        { word: 'cause', pos: '', meaning: '원인', point: false, colloc: 'the primary cause (주요 원인)' },
+        { word: 'decline', pos: '', meaning: '감소', point: false, colloc: 'sharp decline in mortality (사망률의 급격한 감소)' },
+        { word: 'mortality', pos: '', meaning: '사망률, 사망자 수', point: true, colloc: 'infant mortality rate (영아 사망률)' },
+        { word: 'medical', pos: '', meaning: '의학의, 의료의', point: false, colloc: 'medical breakthroughs (의학적 비약적 발전)' },
+        { word: 'advance', pos: '', meaning: '발전', point: false, colloc: 'scientific advances (과학적 진보)' },
+        { word: 'contribute to ~', pos: 'phr.', meaning: '~에 기여하다', point: false, colloc: 'contribute to public health (공중보건에 기여하다)' },
+        { word: 'defender', pos: '', meaning: '옹호자, 방어자', point: true, colloc: 'defenders of science (과학 연구의 옹호자들)' },
+        { word: 'claim', pos: '', meaning: '주장하다', point: false, colloc: 'claim the contrary (그 반대라고 주장하다)' },
+        { word: 'correlation', pos: '', meaning: '상관관계, 연관성', point: true, colloc: 'direct correlation (직접적인 상관관계)' },
+        { word: 'practice', pos: '', meaning: '실행, 실천', point: true, colloc: 'clinical practice (임상 현장 실천)' },
+        { word: 'advancement', pos: '', meaning: '발전', point: false, colloc: 'advancement of knowledge (지식의 진보)' },
+        { word: 'former', pos: '', meaning: '전자', point: false, colloc: 'the former and the latter (전자와 후자)' },
+        { word: 'latter', pos: '', meaning: '후자', point: false, colloc: 'choose the latter option (후자의 선택지를 택하다)' },
+        { word: 'reject', pos: '', meaning: '거부하다, 거절하다', point: true, colloc: 'reject false claims (거짓된 주장을 기각하다)' },
+        { word: 'inference', pos: '', meaning: '추론, 추리', point: true, colloc: 'make a logical inference (논리적인 추론을 내리다)' },
+        { word: 'after all', pos: 'phr.', meaning: '결국, 어쨌든', point: false, colloc: 'After all, health is wealth. (어쨌든 건강이 가장 큰 자산이다)' },
+        { word: 'independent', pos: '', meaning: '독립적인', point: false, colloc: 'independent variables (독립된 변인들)' },
+        { word: 'phenomenon (pl. phenomena)', pos: '', meaning: '현상', point: false, colloc: 'complex phenomenon (복잡한 현상)' },
+        { word: 'prescribe', pos: '', meaning: '규정하다, 명령하다, 처방하다', point: true, colloc: 'prescribe medication (약을 처방하다)' },
+        { word: 'prosthetic', pos: '', meaning: '보철의', point: false, colloc: 'prosthetic limb (의수/의족)' },
+        { word: 'device', pos: '', meaning: '장치', point: false, colloc: 'implanted medical device (체내 삽입 의료 장치)' },
+        { word: 'surgical', pos: '', meaning: '외과의, 수술의', point: true, colloc: 'surgical procedure (수술 절차/기법)' },
+        { word: 'technique', pos: '', meaning: '기술', point: false, colloc: 'new surgical technique (새로운 수술 기법)' },
+        { word: 'try A on B', pos: 'phr.', meaning: 'A를 B에게 시험하다', point: false, colloc: 'try drugs on animals first (약품을 동물에게 먼저 시험하다)' },
+        { word: 'subsequently', pos: '', meaning: '그 후에, 그 결과로', point: true, colloc: 'subsequently approved for humans (그 후 인간용으로 승인된)' },
+        { word: 'prior', pos: '', meaning: '이전의', point: true, colloc: 'prior experience / approval (이전의 경험/사전 승인)' },
+        { word: 'consequently', pos: '', meaning: '따라서, 그 결과', point: true, colloc: 'Consequently, patients survived. (그 결과 환자들이 생존했다)' },
+        { word: 'legal', pos: '', meaning: '법적인, 법률상의', point: true, colloc: 'legal requirement (법적 의무 요건)' },
+        { word: 'necessity', pos: '', meaning: '필요성', point: false, colloc: 'absolute necessity (절대적인 필요성)' },
+        { word: 'evidence', pos: '', meaning: '증거', point: false, colloc: 'scientific evidence (과학적 증거)' },
+        { word: 'lead to ~', pos: 'phr.', meaning: '~로 이어지다', point: false, colloc: 'lead to new treatments (새 치료법으로 이어지다)' },
+        { word: 'influential', pos: '', meaning: '영향력 있는', point: false, colloc: 'highly influential paper (매우 영향력 있는 논문)' },
+        { word: 'physician', pos: '', meaning: '의사, 내과 의사', point: true, colloc: 'consult a physician (내과 의사와 상담하다)' },
+        { word: 'historical', pos: '', meaning: '역사적인', point: false, colloc: 'historical records (역사적 기록)' },
+        { word: 'responsible for ~', pos: 'phr.', meaning: '~의 원인이 되는', point: false, colloc: 'responsible for saving lives (생명을 구하는 주된 원인인)' },
+        { word: 'biomedical', pos: '', meaning: '생의학적', point: false, colloc: 'biomedical research (생의학 연구)' },
+        { word: 'discovery', pos: '', meaning: '발견', point: false, colloc: 'make a major discovery (중대한 발견을 하다)' },
+        { word: 'clinical', pos: '', meaning: '임상의', point: true, colloc: 'clinical trials (임상 시험)' },
+        { word: 'play a role', pos: 'phr.', meaning: '역할을 하다', point: false, colloc: 'play a vital role (중대한 역할을 하다)' },
+        { word: 'substantial', pos: '', meaning: '상당한', point: true, colloc: 'substantial impact (상당한 파급 효과)' },
+        { word: 'unlock', pos: '', meaning: '열다, 자물쇠를 풀다', point: true, colloc: 'unlock secrets of life (생명의 신비를 풀다)' }
+      ],
+      14: [
+        { word: 'mammalian', pos: '', meaning: '포유류의', point: false, colloc: 'mammalian species (포유류 종)' },
+        { word: 'herbivore', pos: '', meaning: '초식동물', point: false, colloc: 'large herbivores (대형 초식동물들)' },
+        { word: 'species', pos: '', meaning: '종', point: true, colloc: 'endangered species (멸종 위기종)' },
+        { word: 'react to ~', pos: 'phr.', meaning: '~에 반응하다', point: true, colloc: 'react instantly to danger (위험에 즉각 반응하다)' },
+        { word: 'danger', pos: '', meaning: '위험', point: false, colloc: 'sense danger (위험을 감지하다)' },
+        { word: 'predator', pos: '', meaning: '포식자', point: true, colloc: 'escape from predators (포식자로부터 달아나다)' },
+        { word: 'nervous', pos: '', meaning: '긴장한, 예민한', point: false, colloc: 'nervous temperament (예민한 신경질적 기질)' },
+        { word: 'programmed', pos: '', meaning: '프로그램화된', point: false, colloc: 'genetically programmed (유전적으로 프로그래밍된)' },
+        { word: 'instant', pos: '', meaning: '즉각적인', point: false, colloc: 'instant response (즉각적인 반응)' },
+        { word: 'flight', pos: '', meaning: '도망, 비행', point: true, colloc: 'fight or flight response (투쟁-도피 반응)' },
+        { word: 'perceive', pos: '', meaning: '인지하다, 감지하다', point: true, colloc: 'perceive a threat (위협을 인지하다)' },
+        { word: 'threat', pos: '', meaning: '위협', point: true, colloc: 'pose a severe threat (심각한 위협이 되다)' },
+        { word: 'seek', pos: '', meaning: '찾다, 추구하다', point: true, colloc: 'seek immediate shelter (즉시 은신처를 찾다)' },
+        { word: 'protection', pos: '', meaning: '보호', point: true, colloc: 'find protection in a herd (무리 속에서 보호를 얻다)' },
+        { word: 'herd', pos: '', meaning: '무리', point: false, colloc: 'stay with the herd (무리와 함께 머물다)' },
+        { word: 'stand one\'s ground', pos: 'phr.', meaning: '(주장·위치)를 고수하다, 지키다', point: false, colloc: 'stand one’s ground against enemies (적에 맞서 자리를 사수하다)' },
+        { word: 'threaten', pos: '', meaning: '위협하다', point: true, colloc: 'feel threatened (위협을 느끼다)' },
+        { word: 'captivity', pos: '', meaning: '감금, 억류', point: false, colloc: 'born in captivity (사육 상태에서 태어난)' },
+        { word: 'keep in captivity', pos: 'phr.', meaning: '계속 가둬 두다', point: true, colloc: 'keep wild animals in captivity (야생동물을 울타리에 가둬 키우다)' },
+        { word: 'enclosure', pos: '', meaning: '우리(울타리)', point: true, colloc: 'zoo enclosure (동물원 우리)' },
+        { word: 'be likely+to부정사', pos: 'phr.', meaning: '~할 가능성이 있다', point: false, colloc: 'be likely to panic (공황 상태에 빠질 가능성이 높다)' },
+        { word: 'panic', pos: '', meaning: '패닉에 빠지다', point: false, colloc: 'panic and run (패닉에 빠져 질주하다)' },
+        { word: 'die of ~', pos: 'phr.', meaning: '~로 죽다', point: true, colloc: 'die of extreme stress / shock (극심한 스트레스/쇼크로 사망하다)' },
+        { word: 'shock', pos: '', meaning: '충격', point: false, colloc: 'suffer from shock (쇼크로 고통받다)' },
+        { word: 'hit oneself against ~', pos: 'phr.', meaning: '자신을 ~에 부딪치다', point: false, colloc: 'hit itself against the fence (울타리에 몸을 계속 부딪히다)' },
+        { word: 'repeatedly', pos: '', meaning: '반복적으로', point: false, colloc: 'crash repeatedly (되풀이해서 충돌하다)' },
+        { word: 'fence', pos: '', meaning: '울타리', point: false, colloc: 'break through the fence (울타리를 뚫고 나가다)' },
+        { word: 'in an attempt to V', pos: 'phr.', meaning: '~하기 위해서, ~하려는 시도로', point: true, colloc: 'in an attempt to break free (벗어나려는 시도로)' },
+        { word: 'escape', pos: '', meaning: '탈출하다', point: true, colloc: 'escape safely (안전하게 탈출하다)' },
+        { word: 'be true of ~', pos: 'phr.', meaning: '~에 해당하다', point: false, colloc: 'This rule is true of all gazelles. (이 규칙은 모든 가젤에게 해당한다)' },
+        { word: 'frequently', pos: '', meaning: '빈번히, 자주', point: true, colloc: 'frequently observed (빈번하게 관찰되는)' },
+        { word: 'hunted', pos: '', meaning: '사냥된', point: false, colloc: 'heavily hunted species (심하게 사냥당하는 종)' },
+        { word: 'game', pos: '', meaning: '사냥감', point: true, colloc: 'big game hunting (대형 사냥감 사냥)' },
+        { word: 'mammal', pos: '', meaning: '포유동물', point: false, colloc: 'wild mammals (야생 포유류)' },
+        { word: 'settle', pos: '', meaning: '정착하다', point: true, colloc: 'settle in a stable place (안정된 장소에 정착하다)' },
+        { word: 'opportunity', pos: '', meaning: '기회', point: false, colloc: 'provide an opportunity (기회를 제공하다)' },
+        { word: 'domesticate', pos: '', meaning: '길들이다', point: true, colloc: 'domesticate wild cattle (야생 소를 가축화/길들이다)' },
+        { word: 'herd', pos: '', meaning: '(가축·동물을) 몰다', point: false, colloc: 'herd sheep (양떼를 몰다)' },
+        { word: 'run away', pos: 'phr.', meaning: '도망치다, 달아나다', point: false, colloc: 'run away blindly (무작정 달아나다)' },
+        { word: 'blindly', pos: '', meaning: '맹목적으로', point: true, colloc: 'leap blindly into danger (위험 속으로 맹목적으로 뛰어들다)' },
+        { word: 'leap', pos: '', meaning: '뛰어오르다', point: true, colloc: 'leap over high hurdles (높은 장애물을 뛰어넘다)' },
+        { word: 'up to ~', pos: 'phr.', meaning: '~까지', point: false, colloc: 'run at speeds up to 80 km/h (시속 80km까지 달리다)' },
+        { word: 'at a speed of ~', pos: 'phr.', meaning: '~의 속도로', point: false, colloc: 'travel at high speed (엄청난 속도로 달리다)' }
+      ],
+      15: [
+        { word: 'species', pos: '', meaning: '종', point: false, colloc: 'human species (인류 종)' },
+        { word: 'resource', pos: '', meaning: '자원', point: false, colloc: 'scarce natural resources (부족한 천연자원)' },
+        { word: 'limited', pos: '', meaning: '제한된', point: true, colloc: 'limited supplies (제한된 보급량)' },
+        { word: 'natural', pos: '', meaning: '타고난, 선천적인', point: false, colloc: 'natural instinct to survive (타고난 생존 본능)' },
+        { word: 'tendency', pos: '', meaning: '경향, 성향', point: true, colloc: 'a natural tendency to share (공유하려는 본성적 성향)' },
+        { word: 'share', pos: '', meaning: '나누다', point: false, colloc: 'share food with strangers (낯선 이와 음식을 나누다)' },
+        { word: 'cooperate', pos: '', meaning: '협력하다', point: false, colloc: 'cooperate for survival (생존을 위해 협력하다)' },
+        { word: 'complicated', pos: '', meaning: '복잡한', point: true, colloc: 'complicated social rules (복잡한 사회 규범)' },
+        { word: 'plenty', pos: '', meaning: '풍부한; 풍부한 양', point: true, colloc: 'plenty of resources (풍부한 자원)' },
+        { word: 'outside', pos: '', meaning: '외부의', point: false, colloc: 'outside world (외부 세계)' },
+        { word: 'tend+to부정사', pos: 'phr.', meaning: '~하는 경향이 있다', point: false, colloc: 'tend to isolate themselves (스스로를 고립시키는 경향이 있다)' },
+        { word: 'open to+(동)명사', pos: 'phr.', meaning: '~하기 쉬운, ~하는 것에 개방적인', point: false, colloc: 'be open to visitors (방문객에게 개방적인 태도를 취하다)' },
+        { word: 'nomadic', pos: '', meaning: '유목의', point: false, colloc: 'nomadic lifestyle (유목 생활 방식)' },
+        { word: 'tribe', pos: '', meaning: '부족', point: true, colloc: 'desert tribe (사막 부족)' },
+        { word: 'nomadic tribe', pos: 'phr.', meaning: '유목민', point: false, colloc: 'traditions of nomadic tribes (유목 부족의 전통)' },
+        { word: 'be happy+to부정사', pos: 'phr.', meaning: '기꺼이 ~하다', point: false, colloc: 'be happy to welcome guests (손님을 기꺼이 환영하다)' },
+        { word: 'interest', pos: '', meaning: '이익', point: false, colloc: 'mutual interest (상호 간의 이익)' },
+        { word: 'in one\'s interest', pos: 'phr.', meaning: '~에게 이익이 되는', point: true, colloc: 'It is in their best interest to cooperate. (협력하는 것이 그들에게 가장 유리하다)' },
+        { word: 'happen upon', pos: 'phr.', meaning: '~을 우연히 만나다', point: true, colloc: 'happen upon an oasis / traveler (오아시스/나그네를 우연히 마주치다)' },
+        { word: 'open ~ up', pos: 'phr.', meaning: '~을 활짝 열다', point: false, colloc: 'open their tents up to strangers (텐트를 낯선 이에게 활짝 열어주다)' },
+        { word: 'hospitality', pos: '', meaning: '환대', point: false, colloc: 'warm hospitality (따뜻한 환대)' },
+        { word: 'survival', pos: '', meaning: '생존', point: true, colloc: 'survival in harsh environments (가혹한 환경에서의 생존)' },
+        { word: 'depend on ~', pos: 'phr.', meaning: '~에 좌우되다, ~에 달려있다', point: true, colloc: 'depend heavily on mutual aid (상호부조에 크게 의존하다)' },
+        { word: 'sharing', pos: '', meaning: '공유, 나누는 것', point: false, colloc: 'sharing of water (물의 공유)' },
+        { word: 'in need of ~', pos: 'phr.', meaning: '~이 필요한', point: true, colloc: 'in desperate need of shelter (은신처가 절실히 필요한)' },
+        { word: 'shelter', pos: '', meaning: '대피소', point: true, colloc: 'provide shelter from storms (폭풍으로부터 피난처를 제공하다)' },
+        { word: 'ironically', pos: '', meaning: '아이러니하게도', point: false, colloc: 'Ironically, more wealth led to isolation. (역설적이게도 부가 늘자 고립되었다)' },
+        { word: 'sophisticated', pos: '', meaning: '정교한', point: true, colloc: 'sophisticated surveillance systems (정교한 감시/보안 시스템)' },
+        { word: 'security', pos: '', meaning: '보안', point: true, colloc: 'home security (주택 보안)' },
+        { word: 'keep ~ away', pos: 'phr.', meaning: '~를 멀리하다, ~을 떼어 놓다', point: false, colloc: 'keep neighbors away (이웃을 멀리 밀어내다)' },
+        { word: 'desire for ~', pos: 'phr.', meaning: '~에 대한 욕망', point: false, colloc: 'desire for privacy (사생활 보호에 대한 욕구)' },
+        { word: 'combine A with B', pos: 'phr.', meaning: 'A를 B와 결합하다', point: true, colloc: 'combine gates with security guards (출입문과 경비원을 결합하다)' },
+        { word: 'increase', pos: '', meaning: '늘리다, 증가시키다', point: true, colloc: 'increase fear of outsiders (외부인에 대한 두려움을 키우다)' },
+        { word: 'decrease', pos: '', meaning: '줄이다, 감소시키다', point: true, colloc: 'decrease human contact (인간적 접촉을 감소시키다)' },
+        { word: 'interaction', pos: '', meaning: '상호작용', point: false, colloc: 'daily social interaction (일상의 사회적 교류)' },
+        { word: 'folk', pos: '', meaning: '대중', point: false, colloc: 'country folk (시골 사람들)' },
+        { word: 'common folk', pos: 'phr.', meaning: '일반 사람들', point: true, colloc: 'lives of common folk (서민들의 삶)' },
+        { word: 'disconnection', pos: '', meaning: '단절', point: true, colloc: 'social disconnection (사회적 단절)' },
+        { word: 'blindness', pos: '', meaning: '무지, 실명', point: true, colloc: 'moral blindness (도덕적 무지/눈멂)' },
+        { word: 'reality', pos: '', meaning: '현실', point: false, colloc: 'lose touch with reality (현실과의 감각을 잃다)' }
       ]
     };
 
-    // Confusing pairs for smarter distractors
+    const MOCK_QUESTION_MAP = {
+      10: '21번',
+      11: '22번',
+      12: '23번',
+      13: '24번',
+      14: '29번',
+      15: '30번'
+    };
+
+    function getDayDisplayTitle(dayNum) {
+      if (MOCK_QUESTION_MAP[dayNum]) {
+        return `Day ${dayNum} - ${MOCK_QUESTION_MAP[dayNum]}`;
+      }
+      return `Day ${dayNum}`;
+    }
+
     const CONFUSING_PAIRS_MAP = {
       '선호하다': '제안하다',
       '제안': '선호하다',
@@ -890,15 +1145,20 @@
       '진보, 발전': '정체성, 신원',
       '정체성, 신원': '진보, 발전',
       '확인하다': '파악하다',
-      '파악하다': '확인하다'
+      '파악하다': '확인하다',
+      '들이마시다': '내쉬다',
+      '내쉬다': '들이마시다',
+      '증발하다, 사라지다': '순환하다',
+      '증폭시키다, 확장하다': '지각하다, 인지하다',
+      '늘리다, 증가시키다': '줄이다, 감소시키다',
+      '줄이다, 감소시키다': '늘리다, 증가시키다'
     };
 
-    // State Variables
     let currentDay = 1;
     let hideMeanings = false;
     let currentFilter = 'all';
     
-    let activeTestMode = 'flashcard'; // 'flashcard' | 'choice' | 'typing'
+    let activeTestMode = 'flashcard';
     let isReviewOnlyMode = false;
     let testWordList = [];
     let currentTestIndex = 0;
@@ -909,9 +1169,8 @@
     let isTypingChecked = false;
     let currentChoiceCorrectIdx = 0;
 
-    // Load and Save LocalStorage
     function loadUserData() {
-      const saved = localStorage.getItem('vocab_study_db_v9');
+      const saved = localStorage.getItem('vocab_study_db_v15');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -932,7 +1191,7 @@
     }
 
     function saveUserData() {
-      localStorage.setItem('vocab_study_db_v9', JSON.stringify(VOCAB_DATABASE));
+      localStorage.setItem('vocab_study_db_v15', JSON.stringify(VOCAB_DATABASE));
     }
 
     function speakWord(text) {
@@ -968,8 +1227,9 @@
     }
 
     // DOM Elements Cache
-    const dayDrawer = document.getElementById('day-drawer');
-    const dayListContainer = document.getElementById('day-list-container');
+    const mainContainer = document.getElementById('main-container');
+    const bottomNavigation = document.getElementById('bottom-navigation');
+    const headerBtnHome = document.getElementById('header-btn-home');
     const wordCardsContainer = document.getElementById('word-cards-container');
     const headerDayLabel = document.getElementById('header-day-label');
     const headerTitle = document.getElementById('header-title');
@@ -996,125 +1256,97 @@
     const testModeModal = document.getElementById('test-mode-modal');
     const resetModal = document.getElementById('reset-modal');
 
+    function createCompactDayTile(dayNum) {
+      const words = VOCAB_DATABASE[dayNum] || [];
+      const schoolCount = words.filter(w => w.point).length;
+      const starredCount = words.filter(w => w.starred).length;
+      const diffCount = words.filter(w => w.difficult).length;
+
+      const titleText = getDayDisplayTitle(dayNum);
+
+      const tile = document.createElement('button');
+      tile.className = 'group p-3 rounded-2xl border border-surface-container bg-surface-white hover:border-primary hover:shadow-sm active:scale-95 transition-all text-left flex flex-col justify-between min-h-[92px] shadow-2xs';
+
+      tile.innerHTML = `
+        <div class="w-full flex items-start justify-between">
+          <div class="flex items-center gap-1">
+            <span class="text-xs sm:text-sm font-bold text-text-primary group-hover:text-primary transition-colors leading-tight">${titleText}</span>
+          </div>
+          <span class="text-[10px] text-text-secondary font-medium shrink-0 ml-1">${words.length}w</span>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap mt-2">
+          ${schoolCount > 0 ? `
+            <span class="px-1.5 py-0.5 rounded bg-school-bg text-school-text font-bold text-[9px] flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[10px]">school</span>${schoolCount}
+            </span>
+          ` : ''}
+          ${starredCount > 0 ? `
+            <span class="px-1.5 py-0.5 rounded bg-amber-50 text-warning font-bold text-[9px] flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">star</span>${starredCount}
+            </span>
+          ` : ''}
+          ${diffCount > 0 ? `
+            <span class="px-1.5 py-0.5 rounded bg-error-container text-error font-bold text-[9px] flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[10px] font-bold">check</span>${diffCount}
+            </span>
+          ` : ''}
+        </div>
+      `;
+
+      tile.addEventListener('click', () => {
+        currentDay = dayNum;
+        switchView('list');
+        renderDay();
+      });
+
+      return tile;
+    }
+
     function renderHome() {
       let totalWords = 0;
       let totalSchool = 0;
       let totalStarred = 0;
       let totalDifficult = 0;
 
-      Object.values(VOCAB_DATABASE).forEach(words => {
+      for (let i = 1; i <= TOTAL_DAYS; i++) {
+        const words = VOCAB_DATABASE[i] || [];
         totalWords += words.length;
         totalSchool += words.filter(w => w.point).length;
         totalStarred += words.filter(w => w.starred).length;
         totalDifficult += words.filter(w => w.difficult).length;
-      });
+      }
 
       document.getElementById('stat-total-school').textContent = totalSchool;
       document.getElementById('stat-total-starred').textContent = totalStarred;
       document.getElementById('stat-total-difficult').textContent = totalDifficult;
-      document.getElementById('home-quick-label').textContent = `Day ${currentDay} 바로 시작`;
+      document.getElementById('home-banner-desc').textContent = `공통영어2 1/2과(Day 1~9)와 2025 9월 모의고사(Day 10~15) 총 ${totalWords}개 단어를 학습할 일자를 아래에서 탭하세요.`;
 
-      const grid = document.getElementById('home-day-cards-grid');
-      grid.innerHTML = '';
-
-      for (let i = 1; i <= TOTAL_DAYS; i++) {
-        const words = VOCAB_DATABASE[i] || [];
-        const schoolCount = words.filter(w => w.point).length;
-        const starredCount = words.filter(w => w.starred).length;
-        const diffCount = words.filter(w => w.difficult).length;
-
-        const card = document.createElement('div');
-        card.className = 'p-4 rounded-2xl border border-surface-container bg-surface-white hover:border-primary/60 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between gap-3 shadow-xs';
-
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-base font-bold text-text-primary">Day ${i}</span>
-            </div>
-            <span class="text-xs font-semibold text-text-secondary">${words.length} 단어</span>
-          </div>
-
-          <div class="flex items-center gap-1.5 flex-wrap text-[11px]">
-            <span class="px-2 py-0.5 rounded-md bg-school-bg text-school-text font-semibold flex items-center gap-1">
-              <span class="material-symbols-outlined text-[13px]">school</span> 학습지 ${schoolCount}
-            </span>
-            ${starredCount > 0 ? `
-              <span class="px-2 py-0.5 rounded-md bg-amber-50 text-warning font-semibold flex items-center gap-0.5">
-                <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span> ${starredCount}
-              </span>
-            ` : ''}
-            ${diffCount > 0 ? `
-              <span class="px-2 py-0.5 rounded-md bg-error-container text-error font-semibold flex items-center gap-0.5">
-                <span class="material-symbols-outlined text-[13px] font-bold">check</span> ${diffCount}
-              </span>
-            ` : ''}
-          </div>
-
-          <div class="flex gap-2 pt-1 border-t border-surface-container">
-            <button class="btn-day-list flex-1 h-9 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-bold text-text-primary transition-colors flex items-center justify-center gap-1">
-              <span class="material-symbols-outlined text-sm">list_alt</span> 단어장
-            </button>
-            <button class="btn-day-quiz flex-1 h-9 rounded-lg bg-primary/10 hover:bg-primary/20 text-xs font-bold text-primary transition-colors flex items-center justify-center gap-1">
-              <span class="material-symbols-outlined text-sm">style</span> 플래시
-            </button>
-          </div>
-        `;
-
-        card.querySelector('.btn-day-list').addEventListener('click', () => {
-          currentDay = i;
-          switchView('list');
-          renderDay();
-        });
-
-        card.querySelector('.btn-day-quiz').addEventListener('click', () => {
-          currentDay = i;
-          startFlashcardQuiz();
-        });
-
-        grid.appendChild(card);
+      // Render 3~4 col Textbook Grid (Day 1 ~ 9)
+      const textbookGrid = document.getElementById('home-textbook-grid');
+      textbookGrid.innerHTML = '';
+      for (let i = 1; i <= 9; i++) {
+        textbookGrid.appendChild(createCompactDayTile(i));
       }
-    }
 
-    function renderDayDrawer() {
-      dayListContainer.innerHTML = '';
-      for (let i = 1; i <= TOTAL_DAYS; i++) {
-        const item = document.createElement('button');
-        const isActive = i === currentDay;
-        item.className = `w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-          isActive 
-            ? 'bg-primary text-on-primary shadow-sm' 
-            : 'text-text-primary hover:bg-surface-container'
-        }`;
-        
-        const words = VOCAB_DATABASE[i] || [];
-        const schoolCount = words.filter(w => w.point).length;
-        item.innerHTML = `
-          <div class="flex items-center gap-2">
-            <span>Day ${i}</span>
-            ${schoolCount > 0 ? `<span class="text-[10px] px-2 py-0.5 rounded-full ${isActive ? 'bg-surface-white/20 text-on-primary font-bold' : 'bg-school-bg text-school-text font-bold flex items-center gap-0.5'}"><span class="material-symbols-outlined text-[11px]">school</span> ${schoolCount}</span>` : ''}
-          </div>
-          <span class="text-xs ${isActive ? 'text-on-primary/80' : 'text-text-secondary'} font-normal">${words.length} words</span>
-        `;
-
-        item.addEventListener('click', () => {
-          currentDay = i;
-          dayDrawer.classList.add('-translate-x-full');
-          switchView('list');
-          renderDay();
-          renderDayDrawer();
-        });
-
-        dayListContainer.appendChild(item);
+      // Render 3~4 col Mock Exam Grid (Day 10 ~ 15)
+      const mockGrid = document.getElementById('home-mock-grid');
+      mockGrid.innerHTML = '';
+      for (let i = 10; i <= 15; i++) {
+        mockGrid.appendChild(createCompactDayTile(i));
       }
     }
 
     function renderDay() {
-      headerDayLabel.textContent = `DAY ${currentDay}`;
-      bannerDayTitle.textContent = `Day ${currentDay} Words`;
+      const isMock = currentDay >= 10;
+      const dayTitle = getDayDisplayTitle(currentDay);
+      headerDayLabel.textContent = dayTitle.toUpperCase();
+      bannerDayTitle.textContent = `${dayTitle} Words`;
+      document.getElementById('banner-day-tag').textContent = isMock ? '2025 9월 모의고사' : '공통영어2 본문 어휘';
       
       const words = VOCAB_DATABASE[currentDay] || [];
       const schoolPointWords = words.filter(w => w.point);
-      bannerWordCount.textContent = `총 ${words.length}개 단어 중 학교 학습지 중요 단어 ${schoolPointWords.length}개`;
+      bannerWordCount.textContent = `총 ${words.length}개 단어 중 학교 학습지 중요 단어 ${schoolPointWords.length}개 (${isMock ? '모의고사' : '교과서'})`;
 
       const starredCount = words.filter(w => w.starred).length;
       const difficultCount = words.filter(w => w.difficult).length;
@@ -1137,7 +1369,7 @@
 
       if (filtered.length === 0) {
         wordCardsContainer.innerHTML = `
-          <div class="py-12 text-center text-text-secondary text-sm bg-surface-white rounded-xl border border-surface-container">
+          <div class="py-10 text-center text-text-secondary text-xs bg-surface-white rounded-xl border border-surface-container">
             해당 조건에 맞는 단어가 없습니다.
           </div>
         `;
@@ -1148,7 +1380,7 @@
         const card = document.createElement('div');
         const isDifficult = item.difficult;
 
-        card.className = `p-4 rounded-xl shadow-xs border transition-all flex flex-col gap-2 ${
+        card.className = `p-3.5 rounded-xl shadow-xs border transition-all flex flex-col gap-2 ${
           isDifficult 
             ? 'bg-error-container/70 border-error/20 text-on-error-container' 
             : item.point 
@@ -1157,49 +1389,49 @@
         }`;
 
         card.innerHTML = `
-          <div class="flex items-center justify-between gap-3">
-            <div class="flex flex-col gap-1 flex-1 min-w-0 cursor-pointer word-detail-area">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-base sm:text-lg font-bold tracking-tight">${item.word}</span>
+          <div class="flex items-center justify-between gap-2.5">
+            <div class="flex flex-col gap-0.5 flex-1 min-w-0 cursor-pointer word-detail-area">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-base font-bold tracking-tight">${item.word}</span>
                 ${item.pos ? `
-                  <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                     isDifficult ? 'bg-surface-white/60 text-on-error-container' : 'bg-surface-container text-on-surface-variant'
                   }">${item.pos}</span>
                 ` : ''}
                 ${item.point ? `
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-school-bg text-school-text border border-indigo-200 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[13px]">school</span> 학습지
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-school-bg text-school-text border border-indigo-200 flex items-center gap-0.5">
+                    <span class="material-symbols-outlined text-[12px]">school</span> 학습지
                   </span>
                 ` : ''}
               </div>
-              <span class="text-sm font-normal truncate ${
+              <span class="text-xs font-normal truncate ${
                 isDifficult ? 'text-on-error-container/90' : 'text-text-secondary'
               } meaning-text ${hideMeanings ? 'opacity-0 select-none' : 'opacity-100'} transition-opacity">
                 ${item.meaning}
               </span>
             </div>
 
-            <div class="flex items-center gap-1 shrink-0">
-              <button class="btn-tts w-9 h-9 rounded-full flex items-center justify-center hover:bg-black/5 transition-colors text-on-surface-variant" title="발음 듣기">
-                <span class="material-symbols-outlined text-[18px]">volume_up</span>
+            <div class="flex items-center gap-0.5 shrink-0">
+              <button class="btn-tts w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/5 transition-colors text-on-surface-variant" title="발음 듣기">
+                <span class="material-symbols-outlined text-[17px]">volume_up</span>
               </button>
-              <button class="btn-star w-9 h-9 rounded-full flex items-center justify-center hover:bg-amber-100/50 transition-colors ${
+              <button class="btn-star w-8 h-8 rounded-full flex items-center justify-center hover:bg-amber-100/50 transition-colors ${
                 item.starred ? 'text-warning' : 'text-outline'
               }" title="내 중요 단어로 별표 북마크">
-                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' ${item.starred ? 1 : 0};">star</span>
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' ${item.starred ? 1 : 0};">star</span>
               </button>
-              <button class="btn-check w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
+              <button class="btn-check w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
                 isDifficult ? 'bg-error text-surface-white shadow-xs' : 'hover:bg-error-container hover:text-error text-outline'
               }" title="복습 필요 단어로 체크">
-                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 600;">check</span>
+                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'wght' 600;">check</span>
               </button>
             </div>
           </div>
 
           ${item.colloc ? `
-            <div class="pt-2 border-t border-surface-container/60 flex items-center gap-1.5 text-[11px] text-text-secondary">
-              <span class="px-1.5 py-0.5 rounded bg-surface-container text-primary font-bold text-[10px] shrink-0">연관 표현</span>
-              <span class="truncate font-medium text-text-primary/90">${item.colloc}</span>
+            <div class="pt-1.5 border-t border-black/5 flex items-center gap-1 text-[11px] font-medium text-text-secondary">
+              <span class="material-symbols-outlined text-[13px] text-primary">auto_stories</span>
+              <span class="text-text-primary font-semibold">${item.colloc}</span>
             </div>
           ` : ''}
         `;
@@ -1255,7 +1487,15 @@
       inner.classList.remove('rotate-y-180');
 
       document.getElementById('fc-word').textContent = item.word;
-      document.getElementById('fc-pos').textContent = item.pos || '단어';
+      
+      const fcPos = document.getElementById('fc-pos');
+      if (item.pos) {
+        fcPos.textContent = item.pos;
+        fcPos.classList.remove('hidden');
+      } else {
+        fcPos.classList.add('hidden');
+      }
+
       document.getElementById('fc-meaning').textContent = item.meaning;
       document.getElementById('fc-word-sub').textContent = item.word;
 
@@ -1268,7 +1508,6 @@
         pointBadge.classList.remove('flex');
       }
 
-      // Collocation Display on back
       const fcCollocBox = document.getElementById('fc-colloc-box');
       const fcCollocText = document.getElementById('fc-colloc-text');
       if (item.colloc) {
@@ -1327,7 +1566,15 @@
       document.getElementById('choice-progress-bar').style.width = `${ratio}%`;
 
       document.getElementById('choice-card-word').textContent = currentItem.word;
-      document.getElementById('choice-card-pos').textContent = currentItem.pos || '단어';
+      
+      const posEl = document.getElementById('choice-card-pos');
+      if (currentItem.pos) {
+        posEl.textContent = currentItem.pos;
+        posEl.classList.remove('hidden');
+      } else {
+        posEl.classList.add('hidden');
+      }
+
       const pointEl = document.getElementById('choice-card-point');
       if (currentItem.point) pointEl.classList.remove('hidden');
       else pointEl.classList.add('hidden');
@@ -1369,7 +1616,7 @@
       distractors = [...distractors, ...remainingCandidates.slice(0, 3 - distractors.length)];
 
       if (distractors.length < 3) {
-        const fallbacks = ['유지하다', '도전적인', '성취하다', '확장시키다', '분명하게'];
+        const fallbacks = ['유지하다', '도전적인', '성취하다', '확장시키다', '분명하게', '증발하다', '공유하다'];
         distractors = [...distractors, ...fallbacks.filter(f => f !== currentItem.meaning && !distractors.includes(f))].slice(0, 3);
       }
 
@@ -1382,9 +1629,9 @@
 
       options.forEach((optText, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'choice-option-btn w-full bg-surface-white hover:bg-surface-container-low text-left px-4 py-3.5 rounded-xl shadow-xs border border-surface-container transition-all duration-200 active:scale-98 relative overflow-hidden flex items-center justify-between group';
+        btn.className = 'choice-option-btn w-full bg-surface-white hover:bg-surface-container-low text-left px-4 py-3 rounded-xl shadow-xs border border-surface-container transition-all duration-200 active:scale-98 relative overflow-hidden flex items-center justify-between group';
         btn.innerHTML = `
-          <span class="text-sm font-semibold text-on-surface">${optText}</span>
+          <span class="text-xs sm:text-sm font-semibold text-on-surface">${optText}</span>
           <span class="material-symbols-outlined text-base opacity-0 choice-check-icon">check_circle</span>
         `;
 
@@ -1482,7 +1729,15 @@
       document.getElementById('typing-progress-bar').style.width = `${ratio}%`;
 
       document.getElementById('typing-card-meaning').textContent = currentItem.meaning;
-      document.getElementById('typing-card-pos').textContent = currentItem.pos || '단어';
+      
+      const posEl = document.getElementById('typing-card-pos');
+      if (currentItem.pos) {
+        posEl.textContent = currentItem.pos;
+        posEl.classList.remove('hidden');
+      } else {
+        posEl.classList.add('hidden');
+      }
+
       const pointEl = document.getElementById('typing-card-point');
       if (currentItem.point) pointEl.classList.remove('hidden');
       else pointEl.classList.add('hidden');
@@ -1499,7 +1754,7 @@
 
       const actionBtn = document.getElementById('typing-btn-action');
       actionBtn.textContent = '정답 확인';
-      actionBtn.className = 'w-full h-14 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-98 transition-all';
+      actionBtn.className = 'w-full h-13 bg-primary text-on-primary font-bold text-base rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-98 transition-all';
 
       const cleanWord = currentItem.word.replace(/[~∼～]/g, '').trim();
       const firstChar = cleanWord.charAt(0);
@@ -1551,7 +1806,7 @@
 
       const actionBtn = document.getElementById('typing-btn-action');
       actionBtn.textContent = '다음 단어로';
-      actionBtn.className = 'w-full h-14 bg-surface-container-high hover:bg-surface-container text-text-primary font-bold text-base rounded-xl shadow-xs flex items-center justify-center gap-2 active:scale-98 transition-all';
+      actionBtn.className = 'w-full h-13 bg-surface-container-high hover:bg-surface-container text-text-primary font-bold text-base rounded-xl shadow-xs flex items-center justify-center gap-2 active:scale-98 transition-all';
     }
 
     function showFinalResult(title) {
@@ -1567,14 +1822,13 @@
 
       const iconWrapper = document.getElementById('result-icon-wrapper');
       if (percentage >= 80) {
-        iconWrapper.className = 'w-20 h-20 rounded-full bg-success/15 flex items-center justify-center text-success';
-        iconWrapper.innerHTML = '<span class="material-symbols-outlined text-5xl">task_alt</span>';
+        iconWrapper.className = 'w-18 h-18 rounded-full bg-success/15 flex items-center justify-center text-success';
+        iconWrapper.innerHTML = '<span class="material-symbols-outlined text-4xl">task_alt</span>';
       } else {
-        iconWrapper.className = 'w-20 h-20 rounded-full bg-warning/15 flex items-center justify-center text-warning';
-        iconWrapper.innerHTML = '<span class="material-symbols-outlined text-5xl">psychology_alt</span>';
+        iconWrapper.className = 'w-18 h-18 rounded-full bg-warning/15 flex items-center justify-center text-warning';
+        iconWrapper.innerHTML = '<span class="material-symbols-outlined text-4xl">psychology_alt</span>';
       }
 
-      // Show Retest Wrong Only Button if there are wrong words
       const btnRetestWrong = document.getElementById('btn-retest-wrong-only');
       const wrongCount = (VOCAB_DATABASE[currentDay] || []).filter(w => w.difficult).length;
       if (wrongCount > 0) {
@@ -1620,61 +1874,54 @@
       navBtnTests.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-on-surface-variant hover:text-primary transition-colors';
 
       if (viewName === 'home') {
+        // HOME VIEW: Hide bottom bar and return button, adjust padding
         viewHome.classList.remove('hidden');
-        navBtnHome.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
+        bottomNavigation.classList.add('hidden');
+        headerBtnHome.classList.add('hidden');
+        headerBtnHome.classList.remove('flex');
+        mainContainer.classList.remove('pb-24');
+        mainContainer.classList.add('pb-8');
+
         headerDayLabel.textContent = 'HOME';
-        headerTitle.textContent = '🍫 vocabulary for JH 🍓';
+        headerTitle.textContent = 'vocabulary for JH';
         renderHome();
-      } else if (viewName === 'list') {
-        viewWordList.classList.remove('hidden');
-        btnToggleAllMeanings.classList.remove('hidden');
-        btnToggleAllMeanings.classList.add('flex');
-        navBtnList.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
-        headerTitle.textContent = `Day ${currentDay} 단어장`;
-      } else if (viewName === 'quiz') {
-        viewQuiz.classList.remove('hidden');
-        navBtnQuiz.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
-        headerTitle.textContent = `Day ${currentDay} 플래시카드`;
-      } else if (viewName === 'choice') {
-        viewChoiceTest.classList.remove('hidden');
-        navBtnTests.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
-        headerTitle.textContent = '객관식 시험 (영 → 한)';
-      } else if (viewName === 'typing') {
-        viewTypingTest.classList.remove('hidden');
-        navBtnTests.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
-        headerTitle.textContent = '주관식 영작 (한 → 영)';
-      } else if (viewName === 'result') {
-        viewQuizResult.classList.remove('hidden');
-        headerTitle.textContent = '학습 결과 리포트';
+      } else {
+        // INSIDE A DAY: Reveal bottom bar and home button, adjust padding
+        bottomNavigation.classList.remove('hidden');
+        headerBtnHome.classList.remove('hidden');
+        headerBtnHome.classList.add('flex');
+        mainContainer.classList.remove('pb-8');
+        mainContainer.classList.add('pb-24');
+
+        if (viewName === 'list') {
+          viewWordList.classList.remove('hidden');
+          btnToggleAllMeanings.classList.remove('hidden');
+          btnToggleAllMeanings.classList.add('flex');
+          navBtnList.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
+          const isMock = currentDay >= 10;
+          headerTitle.textContent = `${getDayDisplayTitle(currentDay)} 단어장 (${isMock ? '모의고사' : '교과서'})`;
+        } else if (viewName === 'quiz') {
+          viewQuiz.classList.remove('hidden');
+          navBtnQuiz.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
+          headerTitle.textContent = `${getDayDisplayTitle(currentDay)} 플래시카드`;
+        } else if (viewName === 'choice') {
+          viewChoiceTest.classList.remove('hidden');
+          navBtnTests.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
+          headerTitle.textContent = '객관식 시험 (영 → 한)';
+        } else if (viewName === 'typing') {
+          viewTypingTest.classList.remove('hidden');
+          navBtnTests.className = 'flex flex-col items-center justify-center gap-1 flex-1 text-primary font-bold';
+          headerTitle.textContent = '주관식 영작 (한 → 영)';
+        } else if (viewName === 'result') {
+          viewQuizResult.classList.remove('hidden');
+          headerTitle.textContent = '학습 결과 리포트';
+        }
       }
     }
 
-    // ==========================================
-    // EVENT LISTENERS INITIALIZATION
-    // ==========================================
-
-    // Drawer Control
-    document.getElementById('btn-open-drawer').addEventListener('click', () => {
-      dayDrawer.classList.remove('-translate-x-full');
-    });
-    document.getElementById('drawer-backdrop').addEventListener('click', () => {
-      dayDrawer.classList.add('-translate-x-full');
-    });
-    document.getElementById('btn-close-drawer').addEventListener('click', () => {
-      dayDrawer.classList.add('-translate-x-full');
-    });
-    document.getElementById('drawer-btn-home').addEventListener('click', () => {
-      dayDrawer.classList.add('-translate-x-full');
+    // Top Header Home button click handler
+    headerBtnHome.addEventListener('click', () => {
       switchView('home');
-    });
-
-    // Home Action Buttons
-    document.getElementById('btn-home-quick-start').addEventListener('click', () => {
-      switchView('list');
-      renderDay();
-    });
-    document.getElementById('btn-home-test-start').addEventListener('click', () => {
-      openTestSelectionModal();
     });
 
     const btnQuickFlashcard = document.getElementById('btn-quick-flashcard');
@@ -1850,11 +2097,6 @@
       }
     });
 
-    document.getElementById('modal-start-flashcard').addEventListener('click', () => {
-      testModeModal.classList.add('hidden');
-      isReviewOnlyMode = false;
-      startFlashcardQuiz();
-    });
     document.getElementById('modal-start-choice').addEventListener('click', () => {
       testModeModal.classList.add('hidden');
       isReviewOnlyMode = false;
@@ -1885,7 +2127,6 @@
 
     // Boot App
     loadUserData();
-    renderDayDrawer();
     switchView('home');
   </script>
 </body>
